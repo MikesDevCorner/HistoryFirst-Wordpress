@@ -13,7 +13,7 @@
   <meta name="theme-color" content="#acca57">
   <!-- Favicons -->
 
-  <title><?php bloginfo('name'); ?><?php wp_title(' | ', 1, 'left'); ?></title>
+  <title><?php wp_title(' | ', 1, 'left'); ?></title>
 
   <!-- Cookie Banner - Start -->
   <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />

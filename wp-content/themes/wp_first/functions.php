@@ -55,6 +55,7 @@ function logo_backend() {
       background-image: url(/wp-content/themes/wp_first/img/logo.png);
       width: 150px;
       background-size: 150px;
+      padding-bottom: 10px;
     }
   </style>
   <?php
