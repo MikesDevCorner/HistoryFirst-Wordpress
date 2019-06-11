@@ -1,0 +1,21 @@
+.breadcrumbs {
+    padding:.6em 4em;
+    background-color: rgba(53,53, 49, .6);
+    margin-bottom: -100%;
+}
+.breadcrumbs ol {
+    margin-bottom: 0;
+}
+.breadcrumbs ol li {
+    display: inline-block;
+    color: #fff;
+}
+
+.breadcrumbs a, .breadcrumbs a:hover {
+    color: #fff;
+    font-weight: normal;
+}
+
+.breadcrumbs ol li:not(:last-child):after {
+    content: " · ";
+}

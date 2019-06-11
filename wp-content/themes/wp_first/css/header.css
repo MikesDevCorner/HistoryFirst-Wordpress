@@ -1,0 +1,7 @@
+header .logo {
+    display: block;
+    padding:1em 4em;
+}
+.logo img {
+    max-width: 265px;
+}
