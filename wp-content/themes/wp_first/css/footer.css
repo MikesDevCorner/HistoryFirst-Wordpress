@@ -1,10 +1,15 @@
 .footer {
     background-color: var(--color-primary-light);
-    padding: 2em 6em;
+    padding: 2em 0;
+}
+.footer p {
+    font-size: calc(16em/16);
+    margin-bottom: 0;
+    display: inline-block;
 }
 
-.footer address {
-    margin-bottom: 0;
+.footer .first-line {
+    display: block;
 }
 
 .footer-menu{

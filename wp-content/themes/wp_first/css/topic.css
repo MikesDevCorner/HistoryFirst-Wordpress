@@ -7,7 +7,7 @@
 
 .btn {
     background-color: var(--color-default);
-    color: white;
+    color: #fff;
     border-radius: .8em;
     font-size: 1.1em;
     padding: .7em 6em;
@@ -17,8 +17,18 @@
 }
 
 .btn:hover {
-    background: white;
+    background: #fff;
     color: var(--color-default);
+}
+
+.btn--light {
+    background-color: #fff;
+    color: var(--color-default);
+}
+
+.btn--light:hover {
+    background-color: var(--color-default);
+    color: #fff;
 }
 
 .btn.focus, .btn:focus {

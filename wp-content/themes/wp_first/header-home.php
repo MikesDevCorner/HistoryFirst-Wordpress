@@ -60,9 +60,36 @@
 
 </head>
 
-<body>
+<body <?php body_class(); ?>>
 
-<?php get_template_part('template-parts/nav'); ?>
-<?php get_template_part('template-parts/sidebar'); ?>
+<div class="homescreen">
+    <div class="homescreen-slogan">
+        <div class="homescreen__circle js-progress-circle"></div>
+        <?php the_field("word1") ?><br><?php the_field("word2") ?><br>
+        <?php $word3 = get_field("word3"); ?>
+        <?php if( have_rows('word3') ): $i = 1; $words = ""; ?>
+            <?php while(have_rows('word3') ) : the_row(); ?>
+                <?php if($i === 1) { $first = get_sub_field('word'); } ?>
+                <?php $words .= "data-word".$i."='".get_sub_field('word')."'"  ?>
+                <?php $i++; ?>
+            <?php endwhile; ?>
+            <span class="js-slogan" data-max="<?php echo $i-1; ?>" <?php echo $words; ?>><?php echo $first; ?></span>
+        <?php endif; ?>
+    </div>
+
+<header>
+    <div class="container no-container-md">
+        <div class="row">
+            <div class="col-md-10">
+                <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/logo-white.svg" alt="Logo history.first">
+                </a>
+            </div>
+            <div class="col-md-2">
+                <!-- TODO menu mobile -->
+            </div>
+        </div>
+    </div>
+</header>
 
 <main>

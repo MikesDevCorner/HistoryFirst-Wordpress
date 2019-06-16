@@ -1,21 +1,125 @@
 .breadcrumbs {
-    padding:.6em 4em;
     background-color: rgba(53,53, 49, .6);
-    margin-bottom: -100%;
 }
-.breadcrumbs ol {
+
+.breadcrumbs-nav {
+    padding: calc(10em/16) calc(64em/16);
+    background-color: rgba(53,53, 49, .6);
+    /*margin-bottom: -100%*/
+}
+.breadcrumbs-nav ol {
     margin-bottom: 0;
 }
-.breadcrumbs ol li {
+.breadcrumbs-nav ol li {
     display: inline-block;
     color: #fff;
 }
 
-.breadcrumbs a, .breadcrumbs a:hover {
+.breadcrumbs-nav a, .breadcrumbs-nav a:hover {
     color: #fff;
     font-weight: normal;
 }
 
-.breadcrumbs ol li:not(:last-child):after {
-    content: " · ";
+.breadcrumbs-nav ol li:not(:last-child):after {
+    content: "·";
+    padding: 0 2px;
+}
+
+@media screen and (max-width: 1070px) {
+    .breadcrumbs-nav {
+        background: none;
+        padding: calc(10em/16) 0;
+        margin-bottom: 0;
+    }
+}
+
+.navbar-toggler {
+    position: relative;
+}
+.navbar-toggler:focus{
+    outline:none;
+}
+
+.animated-menu-icon {
+    display: block;
+    width: 30px;
+    height: 23px;
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    right: calc(15em/16);
+    transition: .5s ease-in-out;
+    cursor: pointer;
+    transform: translateY(-50%) rotate(0deg);
+}
+.animated-menu-icon span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 30px;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+    background: var(--color-primary);
+}
+
+.animated-menu-icon span:nth-child(1) {
+    top: 0;
+}
+
+.animated-menu-icon span:nth-child(2) {
+    top: calc(8em/16);
+}
+
+.animated-menu-icon span:nth-child(3) {
+    top: calc(16em/16);
+}
+
+.animated-menu-icon.open span:nth-child(2) {
+    top: calc(11em/16);
+    width: 0;
+    left: 50%;
+}
+
+.animated-menu-icon.open span:nth-child(1) {
+    transform: rotate(45deg);
+    transform-origin: top left;
+}
+
+.animated-menu-icon.open span:nth-child(3) {
+    transform: rotate(-45deg);
+    transform-origin: bottom left;
+}
+
+@media screen and (max-width: 991px) {
+    .navbar-collapse {
+        color: #fff;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(32,32,30,.95);
+        z-index: 999;
+    }
+    .navbar-collapse a {
+        color: #fff;
+    }
+}
+
+/***** Sidebar Menu *****/
+.menu {
+    position: fixed;
+    right: 15px;
+    bottom: 20px;
+    width: 70px;
+    z-index: 90;
+}
+.menu li:hover {
+    cursor: pointer;
+}
+.menu li:not(:last-child) {
+    margin-bottom: 15px;
 }

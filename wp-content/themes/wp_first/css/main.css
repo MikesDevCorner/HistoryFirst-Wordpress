@@ -2,7 +2,9 @@
 @import "./bootstrap-4.3.1.min.css";
 @import "./header.css";
 @import "./footer.css";
+@import "./home.css";
 @import "./topic.css";
+@import "./event.css";
 @import "./nav.css";
 
 /* FONTS */
@@ -25,6 +27,8 @@
 body {
     font-family: var(--text-primary);
     color: var(--color-default);
+    overflow-x: hidden;
+    min-height: 100vh;
 }
 h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
     color: var(--color-primary);
@@ -34,6 +38,9 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
 p {
     font-size: 1.2em;
     font-weight: 200;
+}
+img {
+    max-width: 100%;
 }
 
 a {

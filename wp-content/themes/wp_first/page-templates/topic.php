@@ -15,11 +15,15 @@
 
 <section>
   <!--TODO Zeitleiste -->
-  <div class="text-center"><?php echo do_shortcode("[timeline-express]"); ?></div>
+  <div class="text-center">
+      <?php $shortcode = get_field("timeline"); ?>
+      <?php echo do_shortcode($shortcode); ?>
+    <?php //echo do_shortcode('[ft_timeline category=4 design="11" daysofweek="off" align="alternate" effect="" order="desc" date-format="" post-number=10 icon="no"]'); ?>
+  </div>
 
   <div class="container mb-5">
-    <div class="row text-center">
-      <div class="col-md-12">
+    <div class="row text-center justify-content-center">
+      <div class="col-md-6">
         <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn" role="button">Zur Startseite</a>
       </div>
     </div>
