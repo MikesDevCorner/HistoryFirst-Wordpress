@@ -1,3 +1,7 @@
+header {
+    position: relative;
+    z-index: 5;
+}
 header .logo {
     display: block;
     padding: calc(16em/16) calc(64em/16);

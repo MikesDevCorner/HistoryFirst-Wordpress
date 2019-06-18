@@ -2,6 +2,16 @@
     background-color: var(--color-primary-light);
     padding: 2em 0;
 }
+.footer--home {
+    background-color: #2b2b24;
+    color: #fff;
+}
+.footer--home p, .footer--home a {
+    color: #fff;
+}
+.footer--home a:hover {
+    color: #fefefe;
+}
 .footer p {
     font-size: calc(16em/16);
     margin-bottom: 0;

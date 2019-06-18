@@ -1,0 +1,26 @@
+input, textarea {
+    background-color: #F5F5F5!important;
+    border: none!important;
+}
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(175,55,0,.25);
+}
+.wpcf7-not-valid-tip {
+    color: var(--color-primary) !important;
+    padding-top: calc(5em/16);
+}
+input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].btn-block {
+    color: var(--color-default) !important;
+    box-shadow: 0 calc(2em/16) calc(4em/16) 0 rgba(0,0,0,.5);
+}
+input[type=submit].btn-block:focus {
+    box-shadow: 0 0 0 0.2rem rgba(175,55,0,.25)!important;
+}
+
+div.wpcf7 input[type="file"] {
+    width: 100%;
+    border-radius: calc(4em/16);
+    min-height: calc(40em/16);
+    display: flex;
+    align-items: center;
+}

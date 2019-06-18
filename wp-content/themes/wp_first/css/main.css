@@ -6,6 +6,8 @@
 @import "./topic.css";
 @import "./event.css";
 @import "./nav.css";
+@import "./form.css";
+
 
 /* FONTS */
 @font-face {
@@ -14,6 +16,13 @@
     font-weight: 400;
     font-display: swap;
     src: url(../fonts/Lato-Regular.woff2) format('woff2');
+}
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(../fonts/Lato-Bold.woff2) format('woff2');
 }
 @font-face {
     font-family: 'Playfair Display';
@@ -37,10 +46,12 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
 }
 p {
     font-size: 1.2em;
-    font-weight: 200;
 }
 img {
     max-width: 100%;
+}
+b, strong {
+    font-weight: 700;
 }
 
 a {
