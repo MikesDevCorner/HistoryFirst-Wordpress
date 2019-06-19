@@ -46,8 +46,10 @@
                     } else {
                       $cat = get_the_category();
                       $cat = $cat[0];
-                      echo get_category_parents($cat, TRUE, ' ' . $delimiterAfter . ' ');
-                      echo $delimiterBefore . $before . get_the_title() . $after . $delimiterAfter;
+                      $catLink = get_permalink( get_page_by_title( $cat->name ) );
+                      echo $delimiterBefore . '<a href="' . $catLink . '">' . $cat->name . '</a> ';
+                      //echo get_category_parents($cat, TRUE, ' ' . $delimiterAfter . ' ');
+                      echo $delimiterBefore . get_the_title() . $after . $delimiterAfter;
                     }
 
                   } elseif (!is_single() && !is_page() && get_post_type() != 'post' && !is_404()) {

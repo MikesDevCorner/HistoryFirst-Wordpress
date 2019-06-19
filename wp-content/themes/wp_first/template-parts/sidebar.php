@@ -28,3 +28,17 @@ if( have_rows('topics', 'options') ):
     </li>
   </ul>
 </aside>
+
+<div class="overlay js-sidebar-menu">
+    <ul class="list-unstyled">
+        <li><span class="overlay__first">Ernährung und Mangel</span>
+        <ul class="list-unstyled submenu">
+            <li><a href="#">1500 bis 1700</a></li>
+            <li><a href="#">1910 bis 1920</a></li>
+            <li><a href="#">1920 bis 1940</a></li>
+            <li><a href="#">1940er</a></li>
+            <li><a href="#">heute</a></li>
+        </ul>
+        </li>
+    </ul>
+</div>

@@ -14,11 +14,10 @@
 </div>
 
 <section>
-  <!--TODO Zeitleiste -->
   <div class="text-center">
-      <?php $shortcode = get_field("timeline"); ?>
-      <?php echo do_shortcode($shortcode); ?>
-    <?php //echo do_shortcode('[ft_timeline category=4 design="11" daysofweek="off" align="alternate" effect="" order="desc" date-format="" post-number=10 icon="no"]'); ?>
+      <?php if(get_field("timeline")) : ?>
+        <?php get_template_part("layout/timeline"); ?>
+      <?php endif; ?>
   </div>
 
   <div class="container mb-5">
@@ -28,7 +27,6 @@
       </div>
     </div>
   </div>
-
 </section>
 
 <?php get_footer(); ?>

@@ -1,7 +1,14 @@
-<?php get_header();
+<?php get_header(); ?>
 
-global $post;
-$post_slug = $post->post_type;
-get_template_part( 'template-parts/single/single', $post_slug );
+  <div class="topic__intro mb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1><?php the_title(); ?></h1>
+          <?php the_content(); ?>
+        </div>
+      </div>
+    </div>
+  </div>
 
-get_footer(); ?>
+<?php get_footer(); ?>

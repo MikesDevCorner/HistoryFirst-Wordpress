@@ -7,6 +7,9 @@
 @import "./event.css";
 @import "./nav.css";
 @import "./form.css";
+@import "./animate.min.css";
+@import "./first-timeline.min.css";
+@import "./timeline.css";
 
 
 /* FONTS */
@@ -38,6 +41,7 @@ body {
     color: var(--color-default);
     overflow-x: hidden;
     min-height: 100vh;
+    background: none!important;
 }
 h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
     color: var(--color-primary);

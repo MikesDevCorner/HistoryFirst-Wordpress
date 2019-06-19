@@ -6,6 +6,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+          <div class="event__article__date"><?php the_field("date"); ?></div>
           <h1><?php the_title(); ?></h1>
           <?php the_content(); ?>
         </div>
@@ -25,7 +26,7 @@ if( $term ): ?>
   )); ?>
     <?php if( $postsOfCat->have_posts() ) : ?>
         <?php while( $postsOfCat->have_posts() ) : $postsOfCat->the_post(); ?>
-            <article>
+            <article class="js-redirect">
                 <div class="row mx-0">
                     <div class="event__article col-md-7">
                         <div class="event__article__text">

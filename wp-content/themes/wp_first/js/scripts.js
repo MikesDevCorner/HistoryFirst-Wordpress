@@ -13,12 +13,18 @@
 
         $(".js-menu-item").click(function(e) {
             e.preventDefault();
+            $(".js-sidebar-menu").toggleClass("open");
 
         });
 
         $(".js-redirect").click(function(e) {
             e.preventDefault();
             location.href = $(this).find('a:first').attr('href');
+        });
+
+        $('.js-tilt').tilt({
+            glare: true,
+            maxGlare: .5
         });
 
         $(".js-slogan").each(function() {
@@ -43,6 +49,7 @@
                     act = max;
                 }
                 let next = i;
+                $(".js-slogan-rest").hide().fadeIn(1000);
                 elem.hide().text(text).fadeIn(1000);
                 if(i < max) {
                     i++;

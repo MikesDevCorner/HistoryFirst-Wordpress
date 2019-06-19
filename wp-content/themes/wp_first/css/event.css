@@ -4,6 +4,13 @@
 
 .event article {
     margin: 2em auto;
+    transition: all 300ms ease;
+}
+.event article:hover {
+    cursor: pointer;
+}
+.event article:hover .event__img {
+    transform: scale(1.03);
 }
 .event__article {
     padding: calc(50em/16);
@@ -15,6 +22,10 @@
 }
 .event article:last-of-type {
     margin-bottom: 5em;
+}
+.event__article__date {
+    font-size: calc(35em/16);
+    color: var(--color-primary);
 }
 .event__article h2 {
     font-size: calc(23em/16);
@@ -47,6 +58,7 @@
     display: flex;
     position: relative;
     overflow: hidden;
+    transition: all 300ms ease;
 }
 
 .event__img img {

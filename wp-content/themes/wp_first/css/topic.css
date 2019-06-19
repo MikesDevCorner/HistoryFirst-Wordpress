@@ -4,6 +4,11 @@
     background-image: url(../img/brot.jpg);
     padding: 6rem 0 3rem;
 }
+@media screen and (max-width: 1070px) {
+    .topic__intro {
+        padding: 3rem 0 3rem;
+    }
+}
 
 .btn {
     background-color: var(--color-default);
