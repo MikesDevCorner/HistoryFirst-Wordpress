@@ -13,7 +13,19 @@
 
         $(".js-menu-item").click(function(e) {
             e.preventDefault();
-            $(".js-sidebar-menu").toggleClass("open");
+            let elem = $(this);
+            let actualElemPost = elem.data("post");
+            let menu = $(".js-sidebar-menu");
+            let content = $(".js-sidebar-menu-content");
+            let newContent = $(".js-sidebar-menu-content[data-post='"+actualElemPost+"']");
+
+            if(!newContent.hasClass("show")) {
+                menu.addClass("open");
+                content.removeClass("show");
+                newContent.addClass("show");
+            } else {
+                menu.toggleClass("open");
+            }
 
         });
 

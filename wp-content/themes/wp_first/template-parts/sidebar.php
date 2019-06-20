@@ -30,15 +30,32 @@ if( have_rows('topics', 'options') ):
 </aside>
 
 <div class="overlay js-sidebar-menu">
-    <ul class="list-unstyled">
-        <li><span class="overlay__first">Ernährung und Mangel</span>
-        <ul class="list-unstyled submenu">
-            <li><a href="#">1500 bis 1700</a></li>
-            <li><a href="#">1910 bis 1920</a></li>
-            <li><a href="#">1920 bis 1940</a></li>
-            <li><a href="#">1940er</a></li>
-            <li><a href="#">heute</a></li>
+    <?php
+    if( have_rows('topics', 'options') ):
+      while ( have_rows('topics', 'options') ) : the_row(); ?>
+      <?php  $post = get_sub_field('topic');
+        setup_postdata( $post ); ?>
+        <ul class="list-unstyled js-sidebar-menu-content" data-post="<?php echo $post->ID; ?>">
+            <li><span class="overlay__first"><?php the_title(); ?></span>
+            <?php $args = array(
+            'post_type'      => 'page',
+            'posts_per_page' => -1,
+            'post_parent'    => $post->ID,
+            'order'          => 'ASC',
+            'orderby'        => 'menu_order'
+            );
+            $parent = new WP_Query( $args );
+            if ( $parent->have_posts() ) : ?>
+            <ul class="list-unstyled submenu js-submenu">
+              <?php while ( $parent->have_posts() ) : $parent->the_post(); ?>
+                <li><a href="<?php the_permalink(); ?>"><?php the_field("date"); ?></a></li>
+              <?php endwhile; ?>
+            </ul>
+            <?php endif; ?>
+            <?php wp_reset_postdata(); ?>
+            </li>
         </ul>
-        </li>
-    </ul>
+    <?php wp_reset_postdata();
+        endwhile; ?>
+    <?php endif; ?>
 </div>

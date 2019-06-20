@@ -49,8 +49,8 @@ body.home main {
     position: absolute;
     width: 35vw;
     height: 35vw;
-    max-width: calc(400em/16);
-    max-height: calc(400em/16);
+    max-width: calc(400rem/16);
+    max-height: calc(400rem/16);
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);

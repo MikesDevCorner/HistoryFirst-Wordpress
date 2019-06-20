@@ -151,10 +151,15 @@
     font-size: calc(23rem/16);
 }
 .overlay > ul {
+    opacity: 0;
     padding-left: calc(50rem/16);
     position: absolute;
     top: 50%;
     transform: translateY(-75%);
+    transition: all 400ms ease;
+}
+.overlay > ul.show {
+    opacity: 1;
 }
 .overlay > ul > li {
     width: 25vw;
