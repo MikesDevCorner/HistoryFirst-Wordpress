@@ -233,3 +233,22 @@
     height: calc(39em/16);
     left: 50%
 }
+
+.frst-timeline-block-hover {
+    position: absolute;
+    border-radius: calc(10em/16);
+    background-color: rgba(216, 216, 216, 0.25);
+    top: 0;
+    bottom: calc(20em/16);
+    right: calc(-500em/16);
+    left: 25%;
+    opacity: 0;
+    transition: all 300ms ease;
+}
+.frst-odd-item .frst-timeline-block-hover {
+    left: calc(-500em/16);
+    right: 25%;
+}
+.frst-timeline-block:hover .frst-timeline-block-hover {
+    opacity: 1;
+}

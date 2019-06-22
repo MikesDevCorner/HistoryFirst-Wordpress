@@ -1,10 +1,31 @@
 .topic__intro {
+    position: relative;
+    padding: 11rem 0 3rem;
+
+}
+.topic__img-holder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    min-height: calc(300rem/16);
+    max-height: calc(450rem/16);
     background-size: cover;
     background-position: left center;
-    background-image: url(../img/brot.jpg);
-    padding: 6rem 0 3rem;
+    background-image: url(../img/bread.jpg);
+    z-index: -1;
 }
-@media screen and (max-width: 1070px) {
+.topic__img-holder:before {
+    content: "";
+    position: absolute;
+    background: rgba(255,255,255,0.8);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+@media screen and (max-width: 991px) {
     .topic__intro {
         padding: 3rem 0 3rem;
     }

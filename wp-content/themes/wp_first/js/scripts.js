@@ -11,6 +11,7 @@
             $('.js-animated-menu-icon').toggleClass('open');
         }); //TODO
 
+        // open (desktop) menu
         $(".js-menu-item").click(function(e) {
             e.preventDefault();
             let elem = $(this);
@@ -24,10 +25,26 @@
                 content.removeClass("show");
                 newContent.addClass("show");
             } else {
-                menu.toggleClass("open");
+                newContent.removeClass("show");
+                menu.removeClass("open");
             }
-
         });
+
+        // click outside the (desktop) menu to close it
+        let menu = $(".js-sidebar-menu");
+        $(document).mouseup(function (e) {
+            if (!menu.is(e.target) // if the click target isn't the menu
+                && menu.has(e.target).length === 0) { // ... nor a descendant of it
+                menu.removeClass('open');
+            }
+        });
+
+        $( window ).resize(function() {
+            if (window.matchMedia("(max-width: 991px)").matches) {
+                menu.removeClass("open");
+            }
+        });
+
 
         $(".js-redirect").click(function(e) {
             e.preventDefault();

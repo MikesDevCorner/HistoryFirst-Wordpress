@@ -1,5 +1,5 @@
 .event {
-    margin-top: 3em;
+    /*margin-top: 3em;*/
 }
 
 .event article {
@@ -11,6 +11,9 @@
 }
 .event article:hover .event__img {
     transform: scale(1.03);
+}
+.event article:hover a {
+    color: var(--color-primary-light);
 }
 .event__article {
     padding: calc(50em/16);

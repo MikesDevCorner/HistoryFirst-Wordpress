@@ -10,7 +10,7 @@ body.home main {
 }
 
 .homescreen {
-    background: url("../img/bg-test.jpg") no-repeat;
+    background: url("../img/bg-glasses.jpg") no-repeat;
     background-position: center center;
     background-size: cover;
     height: 100vh;
@@ -24,7 +24,7 @@ body.home main {
     background: #000;
     content: "";
     top: 0; left: 0; bottom: 0; right: 0;
-    opacity: .2;
+    opacity: .85;
     z-index: -3;
 }
 

@@ -15,6 +15,7 @@
         <?php $odd = false; ?>
         <?php while ( $parent->have_posts() ) : $parent->the_post(); ?>
             <div class="frst-timeline-block js-redirect <?php if($odd) : ?>frst-odd-item<?php else : ?>frst-even-item<?php endif; ?>" data-animation="slideInUp">
+                <div class="frst-timeline-block-hover"></div>
                 <div class="frst-timeline-img"> <span></span> </div>
                 <div class="frst-timeline-content">
                     <div class="frst-timeline-content-inner">

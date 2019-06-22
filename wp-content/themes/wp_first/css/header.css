@@ -1,6 +1,18 @@
 header {
-    position: relative;
+    position: absolute;
+    width: 100%;
+    background: rgba(255,255,255,0.5);
     z-index: 5;
+}
+@media screen and (max-width: 991px) {
+    header {
+        position: relative;
+        background: none;
+    }
+}
+.home header {
+    position: relative;
+    background: none;
 }
 header .logo {
     display: block;

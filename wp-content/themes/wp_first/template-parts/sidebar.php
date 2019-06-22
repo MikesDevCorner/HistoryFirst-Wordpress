@@ -36,7 +36,7 @@ if( have_rows('topics', 'options') ):
       <?php  $post = get_sub_field('topic');
         setup_postdata( $post ); ?>
         <ul class="list-unstyled js-sidebar-menu-content" data-post="<?php echo $post->ID; ?>">
-            <li><span class="overlay__first"><?php the_title(); ?></span>
+            <li><a href="<?php the_permalink(); ?>"><span class="overlay__first"><?php the_title(); ?></span></a>
             <?php $args = array(
             'post_type'      => 'page',
             'posts_per_page' => -1,
