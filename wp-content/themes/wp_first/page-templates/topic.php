@@ -16,7 +16,7 @@
 
 <section>
   <div class="text-center">
-      <?php if(get_field("timeline")) : ?>
+      <?php if(get_field("parent")) : ?>
         <?php get_template_part("layout/timeline"); ?>
       <?php endif; ?>
   </div>

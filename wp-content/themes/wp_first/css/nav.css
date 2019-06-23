@@ -27,13 +27,8 @@
 
 @media screen and (max-width: 1070px) {
     .breadcrumbs-nav {
-        padding: calc(10em/16) 0;
-    }
-}
-@media screen and (max-width: 991px) {
-    .breadcrumbs-nav {
         background: none;
-        /*margin-bottom: 0;*/
+        padding: calc(10em/16) 0;
     }
 }
 
@@ -124,18 +119,37 @@
 .menu li:hover {
     cursor: pointer;
 }
-.menu li img {
+.menu li svg {
+    max-width: 100%;
+    height: auto;
+}
+.menu li svg path {
+    transition: all 300ms ease;
+}
+.menu li img, .menu li svg {
     box-shadow: 0 0 calc(15em/16) calc(-5em/16) #000;
     border-radius: 50%;
     transition: all 300ms ease;
 }
-.menu li:hover img {
+.menu li:hover img, .menu li:hover svg {
     transform: scale(1.05);
-    box-shadow: 0 0 calc(15em/16) calc(-5em/16) #fff;
+    box-shadow: 0 0 calc(15em / 16) calc(-5em / 16) #fff;
+}
+.menu li:hover svg path, .menu li.activeP svg path, .menu a.active svg path {
+    fill: var(--color-primary);
 }
 .menu li:not(:last-child) {
     margin-bottom: 15px;
 }
+@media screen and (max-width: 1199px) {
+    .menu {
+        width: 50px;
+    }
+    .menu li:not(:last-child) {
+        margin-bottom: 8px;
+    }
+}
+
 .overlay {
     position: fixed;
     z-index: 10;

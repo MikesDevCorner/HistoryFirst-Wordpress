@@ -3,7 +3,11 @@
         <div class="row">
             <div class="col-10">
                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="Logo histery.first">
+                  <?php if ( is_home() || is_front_page() ) : ?>
+                    <?php if(get_field('logo_white', 'options')) : ?><img src="<?php the_field('logo_white', 'options'); ?>" alt="Logo history.first"><?php endif; ?>
+                  <?php else :?>
+                    <?php if(get_field('logo_main', 'options')) : ?><img src="<?php the_field('logo_main', 'options'); ?>" alt="Logo history.first"><?php endif; ?>
+                  <?php endif; ?>
                 </a>
             </div>
             <div class="col-2 d-flex align-items-center">
@@ -32,6 +36,8 @@
         </div>
     </div>
 
-  <?php get_template_part('template-parts/breadcrumbs'); ?>
+  <?php if ( !is_home() && !is_front_page() ) : ?>
+    <?php get_template_part('template-parts/breadcrumbs'); ?>
+  <?php endif; ?>
 
 </header>

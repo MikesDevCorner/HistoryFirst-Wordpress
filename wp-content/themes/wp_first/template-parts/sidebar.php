@@ -1,19 +1,40 @@
 <aside class="menu d-none d-lg-block">
-  <ul class="list-unstyled">
+  <ul class="list-unstyled js-icon-list">
 <?php
+
+function isChildOrParent($page_id) {
+  global $post;
+  $is_child = false;
+  $parents = get_post_ancestors($post);
+  if ($parents) {
+    foreach ($parents as $one_parent_id) {
+      if ($one_parent_id == $page_id) {
+        $is_child = true;
+        break;
+      }
+    }
+  }
+  if (!$is_child) {
+      if ($page_id === $post->ID) {
+        $is_child = true;
+      }
+  }
+  return $is_child;
+};
 
 if( have_rows('topics', 'options') ):
   while ( have_rows('topics', 'options') ) : the_row();
 
-    $post = get_sub_field('topic');
-    setup_postdata( $post );
+    global $post;
+    $post2 = get_sub_field('topic');
+    //setup_postdata( $post );
 
-    $icon = get_field('icon');
+    $icon = get_field('icon', $post2->ID);
 
     if( !empty($icon) ): ?>
-    <li>
-      <a href="#" class="js-menu-item" data-post="<?php echo $post->ID; ?>">
-        <img src="<?php echo $icon['url']; ?>" alt="<?php $icon['alt']; ?>" />
+    <li <?php if(isChildOrParent($post2->ID)): ?>class="activeP"<?php endif; ?>>
+      <a href="#" class="js-menu-item" data-post="<?php echo $post2->ID; ?>">
+        <img class="js-inline-svg" src="<?php echo $icon['url']; ?>" alt="<?php $icon['alt']; ?>" />
       </a>
     </li>
     <?php endif;
@@ -21,9 +42,9 @@ if( have_rows('topics', 'options') ):
     wp_reset_postdata();
   endwhile; ?>
 <?php endif; ?>
-    <li>
+    <li <?php if($post->ID === url_to_postid( get_field('upload', 'options') )): ?>class="activeP"<?php endif; ?>>
       <a href="<?php the_field('upload', 'options'); ?>" title="Datei hochladen">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/upload.svg" alt="Icon Upload" />
+        <img class="js-inline-svg" src="<?php echo get_template_directory_uri(); ?>/img/upload.svg" alt="Icon Upload" />
       </a>
     </li>
   </ul>

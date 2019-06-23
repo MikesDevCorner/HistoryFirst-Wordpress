@@ -1,5 +1,6 @@
 @import "./variables.css";
 @import "./bootstrap-4.3.1.min.css";
+@import "./cookie.css";
 @import "./header.css";
 @import "./footer.css";
 @import "./home.css";
@@ -53,6 +54,9 @@ p {
 }
 img {
     max-width: 100%;
+}
+.full-img img {
+    width: 100%;
 }
 b, strong {
     font-weight: 700;

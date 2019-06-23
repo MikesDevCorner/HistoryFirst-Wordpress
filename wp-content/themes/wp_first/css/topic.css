@@ -12,7 +12,8 @@
     min-height: calc(300rem/16);
     max-height: calc(450rem/16);
     background-size: cover;
-    background-position: left center;
+    background-attachment: fixed;
+    background-position: center;
     background-image: url(../img/bread.jpg);
     z-index: -1;
 }

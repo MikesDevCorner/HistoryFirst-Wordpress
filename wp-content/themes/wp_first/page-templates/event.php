@@ -32,7 +32,7 @@ if( $term ): ?>
                     <div class="event__article col-md-7">
                         <div class="event__article__text">
                             <h2><?php the_title(); ?></h2>
-                            <?php the_excerpt(); ?>
+                            <?php the_field("teaser"); ?>
                         </div>
                         <div class="event__article__link">
                             <a href="<?php the_permalink(); ?>">Weiterlesen</a>

@@ -17,14 +17,18 @@
             let elem = $(this);
             let actualElemPost = elem.data("post");
             let menu = $(".js-sidebar-menu");
+            let icons = $(".js-icon-list");
             let content = $(".js-sidebar-menu-content");
             let newContent = $(".js-sidebar-menu-content[data-post='"+actualElemPost+"']");
 
             if(!newContent.hasClass("show")) {
                 menu.addClass("open");
+                icons.find(".active").removeClass("active");
+                elem.addClass("active");
                 content.removeClass("show");
                 newContent.addClass("show");
             } else {
+                icons.find(".active").removeClass("active");
                 newContent.removeClass("show");
                 menu.removeClass("open");
             }
@@ -32,13 +36,16 @@
 
         // click outside the (desktop) menu to close it
         let menu = $(".js-sidebar-menu");
+        let icons = $(".js-icon-list");
         $(document).mouseup(function (e) {
             if (!menu.is(e.target) // if the click target isn't the menu
                 && menu.has(e.target).length === 0) { // ... nor a descendant of it
                 menu.removeClass('open');
+                icons.find(".active").removeClass("active");
             }
         });
 
+        // remove visible sidebar menu on desktop
         $( window ).resize(function() {
             if (window.matchMedia("(max-width: 991px)").matches) {
                 menu.removeClass("open");
@@ -46,16 +53,13 @@
         });
 
 
+        // make link areas clickable
         $(".js-redirect").click(function(e) {
             e.preventDefault();
             location.href = $(this).find('a:first').attr('href');
         });
 
-        $('.js-tilt').tilt({
-            glare: true,
-            maxGlare: .5
-        });
-
+        // change slogan on homepage, add progress circle and move ribbon
         $(".js-slogan").each(function() {
             let elem = $(this);
             let max = parseInt(elem.data("max"));
@@ -74,6 +78,7 @@
             setInterval(function () {
                 let text = elem.data("word"+i);
                 let act = i-1;
+                moveRibbon(act*100 + act);
                 if(act === 0) {
                     act = max;
                 }
@@ -85,12 +90,27 @@
                 } else {
                     i = 1;
                 }
-                changeImg($(".js-home-topic--left"), act, next);
-                changeImg($(".js-home-topic--right"), act, next);
+                //changeImg($(".js-home-topic--left"), act, next);
+                //changeImg($(".js-home-topic--right"), act, next);
                 bar.set(0);
                 bar.animate(1);
             }, 5000);
         });
+
+        // helper function for moving ribbon
+        function moveRibbon(offset) {
+           let ribbon = $(".js-ribbon");
+           ribbon.each(function() {
+               let elem = $(this);
+               if(elem.hasClass("red-ribbon--right")) {
+                   let size = 21 - parseFloat(offset);
+                   elem.css("transform", "translateY("+size+"vh)");
+               } else {
+                   let size = -181 + parseFloat(offset);
+                   elem.css("transform", "translateY("+size+"vh)");
+               }
+           });
+        }
 
         function changeImg(parent, i,next) {
             let img = parent;
@@ -109,33 +129,41 @@
                 imgNext.css("opacity", "1");
                 img.removeClass("start");
             }, 600);
+        }
 
+        $('.js-inline-svg').each(function(){
+            let $img = $(this);
+            let imgID = $img.attr('id');
+            let imgClass = $img.attr('class');
+            let imgURL = $img.attr('src');
 
-/*
+            $.get(imgURL, function(data) {
+                // Get the SVG tag, ignore the rest
+                let $svg = $(data).find('svg');
 
-            let imgLeft = $(".js-home-topic--left:not(.next)");
-            let imgLeft__img = imgLeft.find("img");
-            let next = imgLeft.data("img"+i);
+                // Add replaced image's ID to the new SVG
+                if(typeof imgID !== 'undefined') {
+                    $svg = $svg.attr('id', imgID);
+                }
+                // Add replaced image's classes to the new SVG
+                if(typeof imgClass !== 'undefined') {
+                    $svg = $svg.attr('class', imgClass+' replaced-svg');
+                }
 
-            //let imgRight = $(".js-home-topic--right:not(.next)");
-            let nextLeft = $(".js-home-topic--left.next");
-            //let nextRight = $(".js-home-topic--right.next");
+                // Remove any invalid XML tags as per http://validator.w3.org
+                $svg = $svg.removeAttr('xmlns:a');
 
+                // Check if the viewport is set, if the viewport is not set the SVG wont't scale.
+                if(!$svg.attr('viewBox') && $svg.attr('height') && $svg.attr('width')) {
+                    $svg.attr('viewBox', '0 0 ' + $svg.attr('height') + ' ' + $svg.attr('width'))
+                }
 
-            imgLeft.addClass("goaway");
-            setTimeout(function () {
-                imgLeft.removeClass("goaway");
-                imgLeft.addClass("start");
-                setTimeout(function () {
-                    imgLeft__img.hide().attr("src", next).show();
-                    imgLeft.removeClass("start");
-                }, 300);
+                // Replace image with new SVG
+                $img.replaceWith($svg);
 
-            }, 500);
-            //imgRight.css("transform", "translateY(-100vh)");
-            //nextLeft.fadeIn().removeClass("next").css("transform", "translateY(0)");
-            //imgLeft.addClass("next").css("transform", "translateY(-100vh)").find("img").attr("src", next);
-*/        }
+            }, 'xml');
+
+        });
 
 
 

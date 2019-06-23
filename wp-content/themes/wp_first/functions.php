@@ -85,9 +85,14 @@ if( function_exists('acf_add_options_page') ) {
 
 	acf_add_options_page(array(
 		'page_title' 	=> 'FIRST - allgemeine Einstellungen',
-		'menu_title'	=> 'FIRST Theme',
-		'menu_slug'	=> 'options',
-		'redirect'		=> false
+		'menu_title'	=> 'FIRST Optionen',
+		'menu_slug'	    => 'options',
+		'redirect'		=> false,
+        'position'      => '30.1',
+        'capability' => 'edit_posts',
+        'icon_url'      => 'dashicons-admin-tools',
+        'update_button'		=> 'Aktualisieren',
+        'updated_message'	=> 'Theme aktualisiert',
 	));
 
 }

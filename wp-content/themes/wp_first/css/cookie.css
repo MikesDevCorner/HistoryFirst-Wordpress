@@ -1,0 +1,46 @@
+.dsgvo * {
+    all: unset !important;
+    line-height: 1.2 !important
+}
+
+.dsgvo h1, .dsgvo h2, .dsgvo h3 {
+    line-height: 1 !important;
+    display: block !important
+}
+
+.dsgvo h1 {
+    font-size: 30px !important;
+    margin-top: 25px !important;
+    margin-bottom: 15px !important
+}
+
+.dsgvo h2 {
+    font-size: 25px !important;
+    margin-top: 20px !important;
+    margin-bottom: 10px !important
+}
+
+.dsgvo h3 {
+    font-size: 20px !important;
+    margin-top: 15px !important;
+    margin-bottom: 5px !important
+}
+
+.dsgvo p {
+    display: block !important;
+    margin-bottom: 10px !important;
+    line-height: 1.2 !important
+}
+
+.dsgvo strong, .dsgvo strong * {
+    font-weight: 700 !important
+}
+
+.dsgvo a {
+    text-decoration: underline !important;
+    word-break: break-word !important
+}
+
+.dsgvo br {
+    display: block !important
+}
