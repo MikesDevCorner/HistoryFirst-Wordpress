@@ -1,3 +1,4 @@
+@import "./fonts.css";
 @import "./variables.css";
 @import "./bootstrap-4.3.1.min.css";
 @import "./cookie.css";
@@ -12,30 +13,6 @@
 @import "./first-timeline.min.css";
 @import "./timeline.css";
 
-
-/* FONTS */
-@font-face {
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(../fonts/Lato-Regular.woff2) format('woff2');
-}
-@font-face {
-    font-family: 'Lato';
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url(../fonts/Lato-Bold.woff2) format('woff2');
-}
-@font-face {
-    font-family: 'Playfair Display';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(../fonts/PlayfairDisplay-Regular.woff2) format('woff2');
-}
-
 /* STYLES */
 body {
     font-family: var(--text-primary);
@@ -43,11 +20,13 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
     background: none!important;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
     color: var(--color-primary);
     font-size: 1.8em;
-    font-weight: 200;
+    font-weight: normal;
 }
 p {
     font-size: 1.2em;
@@ -59,7 +38,7 @@ img {
     width: 100%;
 }
 b, strong {
-    font-weight: 700;
+    font-weight: bold;
 }
 
 a {
