@@ -63,8 +63,8 @@
 
 <?php get_template_part('template-parts/nav'); ?>
 
-<?php if ( !is_home() && !is_front_page() ) : ?>
-<?php get_template_part('template-parts/sidebar'); ?>
-<?php endif; ?>
-
 <main>
+
+  <?php if ( !is_home() && !is_front_page() ) : ?>
+    <?php get_template_part('template-parts/sidebar'); ?>
+  <?php endif; ?>

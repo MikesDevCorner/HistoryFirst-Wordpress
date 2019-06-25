@@ -3,6 +3,10 @@
     $(document).ready(function() {
 
         "use strict";
+        let sidebarIcon = $(".js-menu-item");
+        let menu = $(".js-sidebar-menu");
+        let micons = $(".js-icon-list");
+        let content = $(".js-sidebar-menu-content");
 
         // Polyfill for CSS variables for IE
         cssVars();
@@ -12,38 +16,49 @@
         }); //TODO
 
         // open (desktop) menu
-        $(".js-menu-item").click(function(e) {
-            e.preventDefault();
+        sidebarIcon.mouseenter(function(e) {
             let elem = $(this);
+            if(!elem.hasClass("active")) {
+                sidebarMenu(elem, true);
+            }
+        });
+        $(document).on("mouseleave", ".js-sidebar-menu", function(e) {
+            let elem = $(this);
+            micons.find(".active").removeClass("active");
+            content.removeClass("show");
+            elem.removeClass("open");
+        });
+
+        function sidebarMenu(elem, hover = false, leave = false) {
             let actualElemPost = elem.data("post");
-            let menu = $(".js-sidebar-menu");
-            let icons = $(".js-icon-list");
-            let content = $(".js-sidebar-menu-content");
             let newContent = $(".js-sidebar-menu-content[data-post='"+actualElemPost+"']");
 
             if(!newContent.hasClass("show")) {
-                menu.addClass("open");
-                icons.find(".active").removeClass("active");
-                elem.addClass("active");
-                content.removeClass("show");
-                newContent.addClass("show");
+                if (!leave) {
+                    menu.addClass("open");
+                    micons.find(".active").removeClass("active");
+                    elem.addClass("active");
+                    content.removeClass("show");
+                    newContent.addClass("show");
+                }
             } else {
-                icons.find(".active").removeClass("active");
-                newContent.removeClass("show");
-                menu.removeClass("open");
+                if (!hover) {
+                    micons.find(".active").removeClass("active");
+                    newContent.removeClass("show");
+                    menu.removeClass("open");
+                }
             }
-        });
+        }
 
         // click outside the (desktop) menu to close it
-        let menu = $(".js-sidebar-menu");
-        let icons = $(".js-icon-list");
-        $(document).mouseup(function (e) {
+        /*let icons = $(".js-icon-list");
+        $(document).click(function (e) {
             if (!menu.is(e.target) // if the click target isn't the menu
                 && menu.has(e.target).length === 0) { // ... nor a descendant of it
                 menu.removeClass('open');
                 icons.find(".active").removeClass("active");
             }
-        });
+        });*/
 
         // remove visible sidebar menu on desktop
         $( window ).resize(function() {
@@ -51,6 +66,23 @@
                 menu.removeClass("open");
             }
         });
+
+        checkOffset();
+        $(document).scroll(function() {
+            checkOffset();
+        });
+
+        function checkOffset() {
+            let aside = $(".js-aside");
+            if(aside.length) {
+                if(aside.offset().top + aside.height() >= aside.offset().top - 10) {
+                    aside.addClass("fixed");
+                }
+                if($(document).scrollTop() + window.innerHeight < $('.js-footer').offset().top) {
+                    aside.removeClass("fixed");
+                }
+            }
+        }
 
 
         // make link areas clickable
@@ -165,7 +197,19 @@
 
         });
 
+        // Parallax effect for homepage
+        $('.js-parallax').mousemove(function (e) {
+            parallax(e, this, 1);
+        }).mouseleave(function (e) {
+            $(this).css({'top': '50%' ,'left' : '50%'});
+        });
 
+        function parallax(e, target, layer) {
+            var layer_coeff = 10 / layer;
+            var x = ($(window).width() - target.offsetWidth) / 2 - (e.pageX - ($(window).width() / 2)) / layer_coeff;
+            var y = ($(window).height() - target.offsetHeight) / 2 - (e.pageY - ($(window).height() / 2)) / layer_coeff;
+            $(target).offset({ top: y ,left : x });
+        }
 
     });
 })( jQuery );

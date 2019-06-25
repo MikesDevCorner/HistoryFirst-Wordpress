@@ -3,7 +3,7 @@
 </div>
 <?php endif; ?>
 
-<footer class="footer <?php if ( is_home() || is_front_page() ) : ?>footer--home<?php else : ?>mt-5<?php endif; ?>">
+<footer class="footer js-footer <?php if ( is_home() || is_front_page() ) : ?>footer--home<?php else : ?>mt-5<?php endif; ?>">
     <div class="container">
         <div class="row">
             <div class="col-md-12">

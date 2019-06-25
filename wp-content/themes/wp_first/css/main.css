@@ -40,6 +40,9 @@ img {
 b, strong {
     font-weight: bold;
 }
+main {
+    position: relative;
+}
 
 a {
     color: var(--color-default);
@@ -48,8 +51,8 @@ a {
 a:hover {
     color: var(--color-default);
 }
-
-/*placeholder - remove later */
-.spacer {
-    height: 55vh;
+.wysiwyg em {
+    font-size: 0.8em;
+    line-height: 1.4;
+    display: inline-block;
 }

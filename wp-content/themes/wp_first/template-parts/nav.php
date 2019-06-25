@@ -11,6 +11,7 @@
                 </a>
             </div>
             <div class="col-2 d-flex align-items-center">
+                <?php if ( !is_home() && !is_front_page() ) : ?>
                 <nav class="navbar navbar-expand-lg d-lg-none">
                     <button class="navbar-toggler js-navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="animated-menu-icon js-animated-menu-icon"><span></span><span></span><span></span></span>
@@ -32,6 +33,7 @@
                       </ul>
                     </div>
                 </nav>
+                <?php endif; ?>
             </div>
         </div>
     </div>

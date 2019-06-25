@@ -1,4 +1,4 @@
-<aside class="menu d-none d-lg-block">
+<aside class="menu d-none d-lg-block js-aside">
   <ul class="list-unstyled js-icon-list">
 <?php
 
@@ -43,7 +43,7 @@ if( have_rows('topics', 'options') ):
   endwhile; ?>
 <?php endif; ?>
     <li <?php if($post->ID === url_to_postid( get_field('upload', 'options') )): ?>class="activeP"<?php endif; ?>>
-      <a href="<?php the_field('upload', 'options'); ?>" title="Datei hochladen">
+      <a href="#" class="js-menu-item" data-post="<?php echo url_to_postid( get_field('upload', 'options')); ?>" title="Datei hochladen">
         <img class="js-inline-svg" src="<?php echo get_template_directory_uri(); ?>/img/upload.svg" alt="Icon Upload" />
       </a>
     </li>
@@ -79,4 +79,11 @@ if( have_rows('topics', 'options') ):
     <?php wp_reset_postdata();
         endwhile; ?>
     <?php endif; ?>
+    <ul class="list-unstyled js-sidebar-menu-content" data-post="<?php echo url_to_postid(get_field('upload', 'options')); ?>">
+        <li><a href="<?php the_field('upload', 'options'); ?>"><span class="overlay__first">Datei<br>einreichen</span></a>
+          <ul class="list-unstyled submenu js-submenu">
+              <li><a href="<?php the_field('upload', 'options'); ?>">Persönliche Dateien uploaden</a></li>
+          </ul>
+        </li>
+    </ul>
 </div>

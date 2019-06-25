@@ -24,7 +24,7 @@
   <div class="container mb-5">
     <div class="row text-center justify-content-center">
       <div class="col-md-6">
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn" role="button">Zur Startseite</a>
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn btn-block" role="button">Zur Startseite</a>
       </div>
     </div>
   </div>
