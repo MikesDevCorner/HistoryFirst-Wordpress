@@ -6,7 +6,7 @@ body.home main {
     width: 100%;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-45%);
+    transform: translate(-50%,-50%);
 }
 
 .homescreen {
@@ -57,12 +57,12 @@ body.home main {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    tranisiton: all 100ms ease;
+    transition: all 100ms ease;
 }
 
 .home-topic {
     position: relative;
-    height: 100vh;
+    height: 60vh;
 }
 .home-topic:hover {
     cursor: pointer;
@@ -76,11 +76,11 @@ body.home main {
     font-size: calc(28em/16);
     color: #fff;
     text-align: center;
-    margin-top: calc(10em/16);
+    margin-top: calc(15em/16);
     transition: all 300ms ease;
     z-index: 5;
     position: absolute;
-    bottom: 13vh;
+    top: 100%;
     left: 50%;
     width: 125%;
     transform: translateX(-50%);
@@ -88,12 +88,7 @@ body.home main {
 
 .home-topic--right .home-topic__title {
     margin-top: 0;
-    top: 4vh;
-    bottom: unset;
-    /*margin-bottom: calc(15em/16);*/
-}
-.home-topic--right {
-    /*margin-top: calc(-55em/16);*/
+    top: calc(-35em/16);
 }
 .home-topic__title a {
     color: #fff;
@@ -155,15 +150,17 @@ body.home main {
 }
 
 .red-ribbon {
-    position: relative;
+    position: absolute;
+    bottom: calc(30em/16);
     width: 100%;
     background: #AF3700;
-    height: 250%;
-    transform: translateY(-181vh);
+    height: calc(220vh + calc(30em/16));
+    transform: translateY(0);
     transition: transform 500ms ease-in-out;
 }
 .red-ribbon--right {
-    transform: translateY(21vh);
+    top: calc(30em/16);
+    bottom: unset;
 }
 .red-ribbon__content {
     opacity: .7;
@@ -179,7 +176,7 @@ body.home main {
 .red-ribbon__img {
     width: 100%;
     height: 60vh;
-    max-height: calc(400em/16);
+    max-height: 60vh;
     position: relative;
     overflow: hidden;
 }

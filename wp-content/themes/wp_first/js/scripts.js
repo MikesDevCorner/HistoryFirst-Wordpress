@@ -7,6 +7,10 @@
         let menu = $(".js-sidebar-menu");
         let micons = $(".js-icon-list");
         let content = $(".js-sidebar-menu-content");
+	    let middleHeight = $(".home-topic").first().height();
+        let restScreen = $(window).height() - middleHeight;
+	    let redRibbon = (3 * middleHeight) + restScreen; //$(".red-ribbon").first().height();
+        $(".red-ribbon").css("height", redRibbon);
 
         // Polyfill for CSS variables for IE
         cssVars();
@@ -65,6 +69,10 @@
             if (window.matchMedia("(max-width: 991px)").matches) {
                 menu.removeClass("open");
             }
+
+	        middleHeight = $(".home-topic").first().height();
+	        redRibbon = $(".red-ribbon").first().height();
+            $(".red-ribbon").css("height", redRibbon);
         });
 
         checkOffset();
@@ -94,6 +102,7 @@
         // change slogan on homepage, add progress circle and move ribbon
         $(".js-slogan").each(function() {
             let elem = $(this);
+
             let max = parseInt(elem.data("max"));
             let i = 2;
             var bar = new ProgressBar.Circle(".js-progress-circle", {
@@ -110,11 +119,21 @@
             setInterval(function () {
                 let text = elem.data("word"+i);
                 let act = i-1;
-                moveRibbon(act*100 + act);
+                //moveRibbon(act*100 + act);
+		        //moveRibbon(act*38);
                 if(act === 0) {
                     act = max;
                 }
                 let next = i;
+                if(next === 1) {
+                    moveRibbon(0);
+                }
+                if(next === 2) {
+                    moveRibbon((redRibbon / 2) - (middleHeight / 2) + 30);
+                }
+                if(next === 3) {
+                    moveRibbon(redRibbon - middleHeight + 60);
+                }
                 $(".js-slogan-rest").hide().fadeIn(1000);
                 elem.hide().text(text).fadeIn(1000);
                 if(i < max) {
@@ -134,13 +153,11 @@
            let ribbon = $(".js-ribbon");
            ribbon.each(function() {
                let elem = $(this);
+               let size = parseFloat(offset);
                if(elem.hasClass("red-ribbon--right")) {
-                   let size = 21 - parseFloat(offset);
-                   elem.css("transform", "translateY("+size+"vh)");
-               } else {
-                   let size = -181 + parseFloat(offset);
-                   elem.css("transform", "translateY("+size+"vh)");
+                   size = -1 * parseFloat(offset);
                }
+               elem.css("transform", "translateY("+size+"px)");
            });
         }
 
