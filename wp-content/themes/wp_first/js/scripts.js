@@ -54,15 +54,20 @@
             }
         }
 
-        // click outside the (desktop) menu to close it
-        /*let icons = $(".js-icon-list");
-        $(document).click(function (e) {
-            if (!menu.is(e.target) // if the click target isn't the menu
-                && menu.has(e.target).length === 0) { // ... nor a descendant of it
-                menu.removeClass('open');
-                icons.find(".active").removeClass("active");
+        // mobile menu
+        $(".js-open-mobile-submenu").click(function(e) {
+            let elem = $(this);
+            if(!$(e.target).closest('.js-mobile-submenu').length) {
+                if(elem.hasClass("open-submenu") || elem.hasClass("no-sub-items")) {
+                    location.href = $(this).find('a:first').attr('href');
+                }
+                e.preventDefault();
+                $(".open-submenu").removeClass("open-submenu");
+                $(".js-mobile-submenu.open").removeClass("open").slideUp();
+                elem.addClass("open-submenu");
+                elem.parent().find($(".js-mobile-submenu")).addClass("open").slideDown();
             }
-        });*/
+        });
 
         // remove visible sidebar menu on desktop
         $( window ).resize(function() {
@@ -119,8 +124,6 @@
             setInterval(function () {
                 let text = elem.data("word"+i);
                 let act = i-1;
-                //moveRibbon(act*100 + act);
-		        //moveRibbon(act*38);
                 if(act === 0) {
                     act = max;
                 }
@@ -141,8 +144,6 @@
                 } else {
                     i = 1;
                 }
-                //changeImg($(".js-home-topic--left"), act, next);
-                //changeImg($(".js-home-topic--right"), act, next);
                 bar.set(0);
                 bar.animate(1);
             }, 5000);
@@ -209,9 +210,7 @@
 
                 // Replace image with new SVG
                 $img.replaceWith($svg);
-
             }, 'xml');
-
         });
 
         // Parallax effect for homepage
@@ -235,7 +234,6 @@
             }, 1000);
         }, false );
 
-
         $('.js-file').change(function() {
             let fileName = $(this)[0].files[0].name;
             let fileLabel = $(".js-file-label");
@@ -248,9 +246,6 @@
                 limitInfo.removeClass("upload");
                 fileLabel.text(fileName).addClass("upload");
             }
-
-
         });
-
     });
 })( jQuery );
