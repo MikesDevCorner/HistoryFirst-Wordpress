@@ -228,5 +228,29 @@
             $(target).offset({ top: y ,left : x });
         }
 
+        // Contact form - file upload check
+        document.addEventListener( 'wpcf7submit', function( event ) {
+            $("html, body").animate({
+                scrollTop: $('.wpcf7-form').offset().top
+            }, 1000);
+        }, false );
+
+
+        $('.js-file').change(function() {
+            let fileName = $(this)[0].files[0].name;
+            let fileLabel = $(".js-file-label");
+            let limitInfo = $(".js-upload-limit");
+            if($(this)[0].files[0].size >= 8000000) {
+                console.log($(this)[0].files[0].size);
+                limitInfo.addClass("upload");
+                fileLabel.text("Datei ist zu groß").addClass("upload");
+            } else {
+                limitInfo.removeClass("upload");
+                fileLabel.text(fileName).addClass("upload");
+            }
+
+
+        });
+
     });
 })( jQuery );

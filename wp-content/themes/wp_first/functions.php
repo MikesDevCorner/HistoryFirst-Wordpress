@@ -102,3 +102,86 @@ function yoasttobottom() {
   return 'low';
 }
 add_filter( 'wpseo_metabox_prio', 'yoasttobottom');
+
+/**
+ * Dynamic Select List for Contact Form 7
+ * @usage [select name taxonomy:{$taxonomy} ...]
+ */
+function dynamic_select_list( $tag ) {
+
+  // Only run on select lists
+  if( 'select*' !== $tag['type'] ) {
+    return $tag;
+  } else if ( empty( $tag['options'] ) ) {
+    return $tag;
+  }
+
+  $term_args = array();
+
+  // Loop thorugh options to look for our custom options
+  foreach( $tag['options'] as $option ) {
+
+    $matches = explode( ':', $option );
+    if( ! empty( $matches ) ) {
+
+      switch( $matches[0] ) {
+        case 'taxonomy':
+          $term_args['taxonomy'] = $matches[1];
+          break;
+        case 'parent':
+          $term_args['parent'] = intval( $matches[1] );
+          break;
+      }
+    }
+
+  }
+
+  // Ensure we have a term arguments to work with
+  if( empty( $term_args ) ) {
+    return $tag;
+  }
+
+  // Merge dynamic arguments with static arguments
+  $term_args = array_merge( $term_args, array(
+    'hide_empty' => false,
+    'parent' => 0
+  ) );
+
+  $terms = get_terms( $term_args );
+
+  // Add terms to values
+  if( ! empty( $terms ) && ! is_wp_error( $term_args ) ) {
+
+    foreach( $terms as $term ) {
+
+      $tag['values'][] = $term->name;
+
+    }
+
+  }
+
+  return $tag;
+
+}
+add_filter( 'wpcf7_form_tag', 'dynamic_select_list', 10 );
+
+
+
+function custom_validation( $result, $tag ) {
+  $tag = new WPCF7_Shortcode($tag);
+  $result = (object)$result;
+
+  $name = 'kommentar';
+
+  if ( $name == $tag->name ) {
+    $comment = isset( $_POST[$name] ) ? trim( wp_unslash( (string) $_POST[$name] ) ) : '';
+    $file = file_exists($_FILES['upload']['tmp_name']);
+
+    if ( empty( $comment ) && empty( $file ) ) {
+      $result->invalidate( $tag, "Bitte laden Sie entweder eine Datei hoch oder fügen Sie einen Kommentar hinzu." );
+    }
+  }
+
+  return $result;
+}
+add_filter( 'wpcf7_validate_textarea', 'custom_validation', 1, 2 );

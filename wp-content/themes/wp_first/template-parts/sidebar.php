@@ -1,6 +1,7 @@
 <aside class="menu d-none d-lg-block js-aside">
   <ul class="list-unstyled js-icon-list">
 <?php
+$actualID = $post->ID;
 
 function isChildOrParent($page_id) {
   global $post;
@@ -57,7 +58,7 @@ if( have_rows('topics', 'options') ):
       <?php  $post = get_sub_field('topic');
         setup_postdata( $post ); ?>
         <ul class="list-unstyled js-sidebar-menu-content" data-post="<?php echo $post->ID; ?>">
-            <li><a href="<?php the_permalink(); ?>"><span class="overlay__first"><?php the_title(); ?></span></a>
+            <li <?php if($actualID === $post->ID) : ?>class="main-item active"<?php endif; ?>><a href="<?php the_permalink(); ?>"><span class="overlay__first"><?php the_title(); ?></span></a>
             <?php $args = array(
             'post_type'      => 'page',
             'posts_per_page' => -1,
@@ -69,7 +70,7 @@ if( have_rows('topics', 'options') ):
             if ( $parent->have_posts() ) : ?>
             <ul class="list-unstyled submenu js-submenu">
               <?php while ( $parent->have_posts() ) : $parent->the_post(); ?>
-                <li><a href="<?php the_permalink(); ?>"><?php the_field("date"); ?></a></li>
+                <li <?php if($actualID === get_the_ID()) : ?>class="active"<?php endif; ?>><a href="<?php the_permalink(); ?>"><?php the_field("date"); ?></a></li>
               <?php endwhile; ?>
             </ul>
             <?php endif; ?>
