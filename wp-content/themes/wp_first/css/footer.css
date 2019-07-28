@@ -25,3 +25,13 @@
 .footer-menu{
     padding: 0;
 }
+.footer__logo {
+    text-align: right;
+    display: inline-block;
+}
+.footer__logo:not(:last-child) {
+    padding-right: 20px;
+}
+.footer__logo img {
+    height: 60px;
+}

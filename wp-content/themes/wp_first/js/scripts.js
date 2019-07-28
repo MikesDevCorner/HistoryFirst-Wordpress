@@ -8,9 +8,14 @@
         let micons = $(".js-icon-list");
         let content = $(".js-sidebar-menu-content");
 	    let middleHeight = $(".home-topic").first().height();
+        let padding = 30;
         let restScreen = $(window).height() - middleHeight;
 	    let redRibbon = (3 * middleHeight) + restScreen; //$(".red-ribbon").first().height();
         $(".red-ribbon").css("height", redRibbon);
+
+        if (window.matchMedia("(max-width: 575px)").matches) {
+            padding = 15;
+        }
 
         // Polyfill for CSS variables for IE
         cssVars();
@@ -74,6 +79,11 @@
             if (window.matchMedia("(max-width: 991px)").matches) {
                 menu.removeClass("open");
             }
+            if (window.matchMedia("(max-width: 575px)").matches) {
+                padding = 15;
+            } else {
+                padding = 30;
+            }
 
 	        middleHeight = $(".home-topic").first().height();
 	        redRibbon = $(".red-ribbon").first().height();
@@ -132,10 +142,10 @@
                     moveRibbon(0);
                 }
                 if(next === 2) {
-                    moveRibbon((redRibbon / 2) - (middleHeight / 2) + 30);
+                    moveRibbon((redRibbon / 2) - (middleHeight / 2) + padding);
                 }
                 if(next === 3) {
-                    moveRibbon(redRibbon - middleHeight + 60);
+                    moveRibbon(redRibbon - middleHeight + (padding * 2));
                 }
                 $(".js-slogan-rest").hide().fadeIn(1000);
                 elem.hide().text(text).fadeIn(1000);
@@ -227,6 +237,17 @@
             $(target).offset({ top: y ,left : x });
         }
 
+        $('.js-img-parallax').each(function(){
+            var $bgobj = $(this);
+
+            $(window).scroll(function() {
+                var yPos = -($(window).scrollTop() / 2);
+                var coords = '50% '+ yPos + 'px';
+
+                $bgobj.css({ backgroundPosition: coords });
+            });
+        });
+
         // Contact form - file upload check
         document.addEventListener( 'wpcf7submit', function( event ) {
             $("html, body").animate({
@@ -244,7 +265,7 @@
                 fileLabel.text("Datei ist zu groß").addClass("upload");
             } else {
                 limitInfo.removeClass("upload");
-                fileLabel.text(fileName).addClass("upload");
+                //fileLabel.text(fileName).addClass("upload");
             }
         });
     });

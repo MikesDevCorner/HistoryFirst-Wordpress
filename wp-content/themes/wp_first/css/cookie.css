@@ -36,6 +36,10 @@
     font-weight: 700 !important
 }
 
+.recaptcha-button {padding: 0!important;margin: 0!important;border: 0!important;font-size: 12px;}
+.recaptcha-button:hover {text-decoration: underline}
+.grecaptcha-badge {display: none !important; visibility: hidden!important; opacity: 0!important}
+
 .dsgvo a {
     text-decoration: underline !important;
     word-break: break-word !important

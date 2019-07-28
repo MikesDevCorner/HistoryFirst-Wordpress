@@ -42,6 +42,9 @@
     border-top-right-radius: 1em;
     border-bottom-right-radius: 1em;
 }
+.event__article--no-thumbnail {
+    border-radius: 1em!important;
+}
 .event article:nth-child(even) .event__img{
     order: 1;
 }

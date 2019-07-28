@@ -3,8 +3,8 @@
 <?php get_header(); ?>
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-4 js-redirect">
+    <div class="row row--header justify-content-center">
+        <div class="col-md-4 col-5 js-redirect">
             <div class="home-topic">
                 <?php if( have_rows('topic1') ):
                 while( have_rows('topic1') ): the_row(); ?>
@@ -26,7 +26,7 @@
               <?php endif; ?>
             </div>
         </div>
-        <div class="col-4 offset-3 js-redirect">
+        <div class="col-md-4 col-5 offset-md-3 offset-1 js-redirect">
             <div class="home-topic home-topic--right">
               <?php if( have_rows('topic2') ):
                 while( have_rows('topic2') ): the_row(); ?>

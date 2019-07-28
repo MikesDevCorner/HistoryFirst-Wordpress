@@ -87,3 +87,13 @@ div.wpcf7-validation-errors, div.wpcf7-acceptance-missing {
     color: var(--color-default);
     font-weight: bold;
 }
+
+.codedropz-upload-inner h3 {
+    font-size: calc(16em/16);
+    line-height: 0.5;
+}
+.codedropz-btn-wrap {
+    line-height: 1;
+    display: inline-block;
+    padding-left: calc(5em/16);
+}

@@ -5,6 +5,7 @@
 @import "./header.css";
 @import "./footer.css";
 @import "./home.css";
+@import "./media.css";
 @import "./topic.css";
 @import "./event.css";
 @import "./nav.css";
@@ -19,6 +20,7 @@ body {
     color: var(--color-default);
     overflow-x: hidden;
     min-height: 100vh;
+    min-width: 300px;
     background: none!important;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;

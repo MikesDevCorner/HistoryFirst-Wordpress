@@ -16,6 +16,7 @@ add_action('wp_enqueue_scripts', function () {
   wp_enqueue_script('progressbar', get_template_directory_uri() . '/js/libs/progressbar.js', array('jquery'), '1.0.0');
   wp_enqueue_script('parallax', get_template_directory_uri() . '/js/libs/parallax.js', array('jquery'), '1.0.0', true);
   wp_enqueue_script('modernizr', get_template_directory_uri() . '/js/libs/modernizr.js', array('jquery'), '1.0.0', true);
+  wp_enqueue_script('leaflet', get_template_directory_uri() . '/js/libs/leaflet.js', array('jquery'), '1.0.0', true);
   wp_enqueue_script('first-timeline', get_template_directory_uri() . '/js/libs/frst-timeline.min.js', array('jquery'), '1.0.0', true);
   wp_enqueue_script('main_script', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0', true);
 });
@@ -175,7 +176,8 @@ function custom_validation( $result, $tag ) {
 
   if ( $name == $tag->name ) {
     $comment = isset( $_POST[$name] ) ? trim( wp_unslash( (string) $_POST[$name] ) ) : '';
-    $file = file_exists($_FILES['upload']['tmp_name']);
+    $file = isset( $_POST["upload"] );
+    //$file = file_exists($_FILES['upload']['tmp_name']);
 
     if ( empty( $comment ) && empty( $file ) ) {
       $result->invalidate( $tag, "Bitte laden Sie entweder eine Datei hoch oder fügen Sie einen Kommentar hinzu." );
