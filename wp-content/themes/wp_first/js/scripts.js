@@ -148,7 +148,7 @@
                     moveRibbon(redRibbon - middleHeight + (padding * 2));
                 }
                 $(".js-slogan-rest").hide().fadeIn(1000);
-                elem.hide().text(text).fadeIn(1000);
+                elem.hide().html(text).fadeIn(1000);
                 if(i < max) {
                     i++;
                 } else {
@@ -260,13 +260,115 @@
             let fileLabel = $(".js-file-label");
             let limitInfo = $(".js-upload-limit");
             if($(this)[0].files[0].size >= 8000000) {
-                console.log($(this)[0].files[0].size);
                 limitInfo.addClass("upload");
                 fileLabel.text("Datei ist zu groß").addClass("upload");
             } else {
                 limitInfo.removeClass("upload");
                 //fileLabel.text(fileName).addClass("upload");
             }
+        });
+
+
+
+        // Map ===========================================================
+        var map = null;
+        var latlngs = []; //array list of all points
+        var firstIcon = L.icon({
+            iconUrl: '/wp-content/themes/wp_first/img/marker.png',
+            //shadowUrl: 'leaf-shadow.png',
+
+            iconSize:     [38, 95], // size of the icon
+            //shadowSize:   [50, 64], // size of the shadow
+            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+            //shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        function render_map( $el ) {
+            var $markers = $el.find('.js-marker');
+
+            map = L.map($el[0], {
+                minZoom : 0,
+                maxZoom : 18,
+                zoomSnap : 0.1,
+                zoomDelta: 0.5,
+                scrollWheelZoom	: false,
+                touchZoom:true,
+                dragging:!L.Browser.mobile
+            });
+
+            L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
+                attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>'})
+                .addTo(map);
+
+            /*var baseLayers = {
+            "Mapbox": mapbox,
+            "OpenStreetMap": osm
+        };
+        L.control.layers(baseLayers).addTo(map);
+        */
+
+            map.markers= [];
+
+            $.each($markers, function (index, value) {
+                add_marker( jQuery(this), map);
+            });
+
+            map.setView([0, 0], 4);
+
+            if($el.data("lines")) {
+                var polyline = L.polyline(latlngs, {color: '#AF3802'}).addTo(map);
+                //map.fitBounds(polyline.getBounds());
+            }
+
+            center_map( map );
+
+            map.on('resize', function () {
+                center_map( map );
+            });
+
+            $markers.remove();
+        }
+
+        function add_marker( $marker, map) {
+
+            var marker_content = '<div class="map-property clearfix">'+
+                '<p>'+$marker.find('.js-info').html()+'</p>'+
+                '</div>';
+
+            var marker = L.marker([$marker.attr('data-lat'), $marker.attr('data-lng')],
+                {icon: firstIcon}).addTo(map).bindPopup(marker_content);
+            latlngs.push([$marker.attr('data-lat'), $marker.attr('data-lng')]);
+
+
+            /* var marker =  L.circleMarker([$marker.attr('data-lat'), $marker.attr('data-lng')], {
+                radius:10,
+                fillColor: $marker[0].color,
+                color: "#000",
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 1,
+            }).addTo(map).bindPopup(marker_content);*/
+
+            //.bindTooltip("1", {permanent: true, className: "my-label", offset: [0, 0], direction: 'center' })
+
+            map.markers.push( marker );
+        }
+
+
+        function center_map( map ) {
+            if ( map.markers.length == 1 ) {
+                map.setView(map.markers[0].getLatLng(),15);
+                // map.setZoom( 16 );
+            }
+            else {
+                var group = new L.featureGroup(map.markers);
+                map.fitBounds(group.getBounds().pad(0.2));
+            }
+        }
+
+        $('.js-map').each(function(){
+            render_map( $(this) );
         });
     });
 })( jQuery );

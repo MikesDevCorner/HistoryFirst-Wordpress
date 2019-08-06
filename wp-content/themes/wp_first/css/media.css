@@ -1,3 +1,146 @@
 audio, video {
     width: 100%;
 }
+
+.audioo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.audioo span {
+    cursor: default;
+}
+
+.audio__player {
+    width: 100%;
+    min-width: calc(300em/16);
+    height: calc(56em/16);
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, .07);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: calc(25em/16);
+    padding-right: calc(25em/16);
+    border-radius: 4px;
+    user-select: none;
+    -webkit-user-select: none;
+    background-color: #fff;
+}
+.audio__player__btn {
+    display: none;
+    cursor: pointer;
+}
+.audio__player__spinner {
+    width: calc(18em/16);
+    height: calc(18em/16);
+    background-image: url("../img/loading.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    animation: spin 0.4s linear infinite;
+}
+.controls__slider, .volume-controls__slider {
+    flex-grow: 1;
+    background-color: #d8d8d8;
+    cursor: pointer;
+    position: relative;
+}
+.controls__progress, .volume-controls__progress {
+    background-color: var(--color-primary);
+    border-radius: inherit;
+    position: absolute;
+    pointer-events: none;
+}
+.controls__progress .pin, .volume-controls__progress .pin {
+    height: calc(16em/16);
+    width: calc(16em/16);
+    border-radius: 8px;
+    background-color: var(--color-primary);
+    position: absolute;
+    pointer-events: all;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.32);
+}
+.controls {
+    font-family: var(--text-primary);
+    font-size: calc(16em / 16);
+    line-height: calc(18em / 16);
+    color: #55606E;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: calc(25em/16);
+    margin-right: calc(25em/16);
+}
+.controls__slider {
+    margin-left: calc(15em/16);
+    margin-right: calc(15em/16);
+    border-radius: 2px;
+    height: calc(4em / 16);
+}
+.controls__progress {
+    width: 0;
+    height: 100%;
+}
+.controls__progress .pin {
+    right: calc(-8em/16);
+    top: calc(-6em/16);
+}
+.volume {
+    position: relative;
+}
+.volume-btn {
+    cursor: pointer;
+}
+.volume-btn.open path {
+    fill: var(--color-primary);
+}
+.volume-controls {
+    width: calc(30em/16);
+    height: calc(135em/16);
+    background-color: rgba(0, 0, 0, 0.62);
+    border-radius: 7px;
+    position: absolute;
+    left: calc(-3em/16);
+    bottom: calc(52em/16);
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+}
+.volume-controls.hidden {
+     display: none;
+}
+.volume-controls__slider {
+    margin-top: calc(12em/16);
+    margin-bottom: calc(12em/16);
+    width: calc(6em/16);
+    border-radius: 3px;
+}
+.volume-controls__progress {
+    bottom: 0;
+    height: 100%;
+    width: calc(6em/16);
+}
+.volume-controls__progress .pin {
+    left: calc(-5em/16);
+    top: calc(-8em/16);
+}
+
+@keyframes spin {
+    from {
+        transform: rotateZ(0);
+    }
+    to {
+        transform: rotateZ(1turn);
+    }
+}
+.source {
+    opacity: .7;
+    font-size: 12px;
+    width: 100%;
+    margin-top: 10px;
+}
+.source p {
+    opacity: .7;
+    font-size: 12px;
+    width: 100%;
+}

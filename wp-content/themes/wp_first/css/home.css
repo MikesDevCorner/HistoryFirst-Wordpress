@@ -35,22 +35,24 @@ body.home main {
     left: 50%;
     transform: translate(-50%,-50%);
     font-family: var(--text-secondary);
-    font-size: calc(65em/16);
+    font-size: calc(60em/16);
     text-align: center;
     color: #fff;
     z-index: 5;
-    line-height: 1.2;
+    line-height: 1.15;
     transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 }
 .homescreen-slogan__inner {
     transform: translateZ(20px);
+    margin-top: -15px;
+    display: inline-block;
 }
 
 @media screen and (max-width: 1199px) {
     .homescreen-slogan {
-        font-size: 6vw;
+        font-size: 5.5vw;
     }
 }
 @media screen and (max-width: 575px) {
