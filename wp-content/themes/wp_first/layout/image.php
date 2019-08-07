@@ -2,7 +2,14 @@
   <?php $image = get_sub_field('bild');
   if( !empty($image) ): ?>
 
-    <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+      <figure>
+          <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+          <?php if(wp_get_attachment_caption($image['id'])) : ?>
+          <figcaption>
+              <?php echo wp_get_attachment_caption($image['id']); ?>
+          </figcaption>
+          <?php endif; ?>
+      </figure>
 
   <?php endif; ?>
 

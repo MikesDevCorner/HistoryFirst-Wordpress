@@ -40,6 +40,11 @@ img {
 .full-img img {
     width: 100%;
 }
+figcaption {
+    margin-top: calc(10em/16);
+    font-weight: bold;
+    margin-bottom: calc(-5em/16);
+}
 b, strong {
     font-weight: bold;
 }

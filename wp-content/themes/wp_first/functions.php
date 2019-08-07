@@ -188,3 +188,17 @@ function custom_validation( $result, $tag ) {
   return $result;
 }
 add_filter( 'wpcf7_validate_textarea', 'custom_validation', 1, 2 );
+
+function acf_admin_head() {
+  ?>
+    <style type="text/css">
+
+        .acf-source iframe {
+            height: 50px!important;
+        }
+
+    </style>
+  <?php
+}
+
+add_action('acf/input/admin_head', 'acf_admin_head');

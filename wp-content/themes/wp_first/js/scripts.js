@@ -273,16 +273,6 @@
         // Map ===========================================================
         var map = null;
         var latlngs = []; //array list of all points
-        var firstIcon = L.icon({
-            iconUrl: '/wp-content/themes/wp_first/img/marker.png',
-            //shadowUrl: 'leaf-shadow.png',
-
-            iconSize:     [38, 95], // size of the icon
-            //shadowSize:   [50, 64], // size of the shadow
-            iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-            //shadowAnchor: [4, 62],  // the same for the shadow
-            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-        });
 
         function render_map( $el ) {
             var $markers = $el.find('.js-marker');
@@ -331,6 +321,13 @@
         }
 
         function add_marker( $marker, map) {
+
+            var firstIcon = L.icon({
+                iconUrl: '/wp-content/themes/wp_first/img/marker-'+$marker.attr('data-color')+'.svg',
+                iconSize:     [32, 32], // size of the icon
+                iconAnchor:   [17, 31], // point of the icon which will correspond to marker's location
+                popupAnchor:  [0, -17] // point from which the popup should open relative to the iconAnchor
+            });
 
             var marker_content = '<div class="map-property clearfix">'+
                 '<p>'+$marker.find('.js-info').html()+'</p>'+
