@@ -46,4 +46,9 @@ header .logo {
     header .logo {
         padding: calc(16em/16) 0;
     }
+    @media screen and (min-width: 992px) {
+        header .logo {
+            padding-left: calc(10em/16);
+        }
+    }
 }

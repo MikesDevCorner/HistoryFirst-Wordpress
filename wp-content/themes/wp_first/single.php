@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<div class="topic__intro mb-5">
+<div class="topic__intro mb-3 mb-md-5">
     <div class="topic__img-holder" <?php if(false) { echo "style='background-image:url(".get_the_post_thumbnail_url().")'"; } ?>></div>
     <div class="container">
       <div class="row">
@@ -13,7 +13,7 @@
 </div>
 
 <section>
-    <div class="container mb-5">
+    <div class="container mb-3 mb-md-5">
         <div class="row justify-content-center">
             <div class="col-md-12">
               <?php the_content(); ?>
@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <div class="container mb-5">
+    <div class="container mb-3 mb-md-5">
         <div class="row text-center justify-content-center">
             <div class="col-md-6">
               <?php global $post;
@@ -37,7 +37,7 @@
                   </a>
               <?php } ?>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mt-3 mt-md-0">
                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn btn--light d-block" role="button">Zur Startseite</a>
             </div>
         </div>

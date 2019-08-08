@@ -12,3 +12,4 @@
             <?php endif; ?>
         </span>
     </div>
+<div class="homescreen-loading js-home-loading"></div>

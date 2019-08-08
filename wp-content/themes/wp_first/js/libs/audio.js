@@ -17,18 +17,28 @@ if(audioPlayer) {
     var draggableClasses = ['pin'];
     var currentlyDragged = null;
 
-    window.addEventListener('mousedown', function(event) {
+    var clickevent1 = "mousedown";
+    var clickevent2 = "mousemove";
+    var clickevent3 = "mouseup";
+    if (window.matchMedia("(max-width: 767px)").matches) {
+        // touch events are supported
+        //clickevent1 = "touchstart";
+        //clickevent2 = "touchmove";
+        //clickevent3 = "touchend";
+    }
+
+    window.addEventListener(clickevent1, function(event) {
 
         if(!isDraggable(event.target)) return false;
 
         currentlyDragged = event.target;
         let handleMethod = currentlyDragged.dataset.method;
 
-        this.addEventListener('mousemove', window[handleMethod], false);
+        this.addEventListener(clickevent2, window[handleMethod], false);
 
-        window.addEventListener('mouseup', () => {
+        window.addEventListener(clickevent3, () => {
             currentlyDragged = false;
-            window.removeEventListener('mousemove', window[handleMethod], false);
+            window.removeEventListener(clickevent2, window[handleMethod], false);
         }, false);
     });
 
@@ -38,7 +48,7 @@ if(audioPlayer) {
     player.addEventListener('loadedmetadata', () => {
         totalTime.textContent = formatTime(player.duration);
     });
-    player.addEventListener('canplay', makePlay);
+    player.addEventListener('loadedmetadata', makePlay);
     player.addEventListener('ended', function(){
         playPause.attributes.d.value = "M18 12L0 24V0";
         player.currentTime = 0;
@@ -109,7 +119,7 @@ if(audioPlayer) {
         if(event.type == 'click' && isDraggable(event.target)) {
             rangeBox = event.target.parentElement.parentElement;
         }
-        if(event.type == 'mousemove') {
+        if(event.type == 'mousemove touchmove') {
             rangeBox = el.parentElement.parentElement;
         }
         return rangeBox;

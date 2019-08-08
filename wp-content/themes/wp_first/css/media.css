@@ -88,6 +88,11 @@ audio, video {
 .volume {
     position: relative;
 }
+@media screen and (max-width: 767px) {
+    .volume {
+        display: none;
+    }
+}
 .volume-btn {
     cursor: pointer;
 }
@@ -133,14 +138,27 @@ audio, video {
         transform: rotateZ(1turn);
     }
 }
+
+audio {
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, .07);
+}
+audio:focus {
+    outline-color: var(--color-primary);
+}
+
+audio::-webkit-media-controls-enclosure {
+    border-radius: 0;
+    background: #fff;
+}
+
 .source {
     opacity: .7;
-    font-size: 12px;
+    font-size: calc(12em/16);
     width: 100%;
-    margin-top: 10px;
+    margin-top: calc(10em/16);
 }
 .source p {
     opacity: .7;
-    font-size: 12px;
+    font-size: calc(12em/16);
     width: 100%;
 }

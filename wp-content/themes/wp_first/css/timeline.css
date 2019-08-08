@@ -351,10 +351,15 @@
         text-align:left!important;
     }
 
+    .frst-timeline-style-11 .frst-timeline-content {
+        width: 100%;
+    }
+
     .frst-timeline-style-11 .frst-timeline-content-inner {
         background: none!important;
         box-shadow: none!important;
-
+        width: 100%;
+        padding: 20px 0 0;
     }
     .frst-timeline-style-11 .frst-timeline-block::before {
         background: #D17A21!important;

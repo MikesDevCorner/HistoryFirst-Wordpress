@@ -52,16 +52,29 @@
     order: 2;
 }
 @media screen and (max-width: 767px) {
+    .event__article {
+        padding: calc(20em/16);
+    }
+    .event__article__text {
+        line-height: 1.4;
+        margin-bottom: calc(15em/16);
+    }
     .event article:nth-child(odd) .event__img{
         order: 1;
     }
     .event article:nth-child(odd) .event__article{
         order: 2;
     }
+    .event article .event__article{
+        border-top-left-radius: 0!important;
+        border-bottom-left-radius: 1em;
+        border-top-right-radius: 0!important;
+        border-bottom-right-radius: 1em;
+    }
 }
 .event__img {
     width: 100%;
-    min-height: 300px;
+    min-height: calc(300em/16);
     display: flex;
     position: relative;
     overflow: hidden;

@@ -7,11 +7,20 @@
         let menu = $(".js-sidebar-menu");
         let micons = $(".js-icon-list");
         let content = $(".js-sidebar-menu-content");
-	    let middleHeight = $(".home-topic").first().height();
+	    let loadScreen = $(".js-home-loading");
         let padding = 30;
-        let restScreen = $(window).height() - middleHeight;
-	    let redRibbon = (3 * middleHeight) + restScreen; //$(".red-ribbon").first().height();
-        $(".red-ribbon").css("height", redRibbon);
+        let middleHeight, restScreen, redRibbon;
+
+        // calc vh dynamically (iOS fix)
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', vh+'px');
+
+        $(window).load(function() {
+            middleHeight = $(".home-topic").first().height();
+            restScreen = $(window).height() - middleHeight;
+            redRibbon = (3 * middleHeight) + restScreen; //$(".red-ribbon").first().height();
+            $(".red-ribbon").css("height", redRibbon);
+        });
 
         if (window.matchMedia("(max-width: 575px)").matches) {
             padding = 15;
@@ -19,6 +28,53 @@
 
         // Polyfill for CSS variables for IE
         cssVars();
+
+        // show load screen at first page load
+        if(loadScreen.length) {
+            if(sessionStorage.getItem('loaded')) {
+              loadScreen.hide();
+              startCircles();
+            } else {
+                var start = false;
+                $(window).load(function () {
+                    start = true;
+                    sessionStorage.setItem('loaded', 'true');
+                });
+
+                $(".js-slogan").each(function() {
+                    let elem = $(this);
+                    let text = "Unsere<br>Geschichte<br>lädt";
+                    elem.hide().html(text).fadeIn(1000);
+
+                    var bar = new ProgressBar.Circle(".js-progress-circle", {
+                        strokeWidth: 1,
+                        duration: 2000,
+                        color: '#FFF',
+                        trailColor: '#eee',
+                        trailWidth: 0.4,
+                        svgStyle: null
+                    });
+
+                    bar.animate(1);
+                    isLoaded();
+
+                    function isLoaded() {
+                        setTimeout(function() {
+                            bar.set(0);
+                            if(start) {
+                                bar.destroy();
+                                loadScreen.fadeOut("slow");
+                                startCircles();
+                            } else {
+                                bar.animate(1);
+                                isLoaded();
+                            }
+                        }, 2000)
+                    }
+
+                });
+            }
+        }
 
         $('.js-navbar-toggler').on('click', function () {
             $('.js-animated-menu-icon').toggleClass('open');
@@ -115,49 +171,55 @@
         });
 
         // change slogan on homepage, add progress circle and move ribbon
-        $(".js-slogan").each(function() {
-            let elem = $(this);
+        function startCircles() {
+            $(".js-slogan").each(function() {
+                let elem = $(this);
+                let max = parseInt(elem.data("max"));
+                let i = 2;
 
-            let max = parseInt(elem.data("max"));
-            let i = 2;
-            var bar = new ProgressBar.Circle(".js-progress-circle", {
-                strokeWidth: 1,
-                duration: 5000,
-                color: '#FFF',
-                trailColor: '#eee',
-                trailWidth: 0.4,
-                svgStyle: null
-            });
-
-            bar.animate(1);
-
-            setInterval(function () {
-                let text = elem.data("word"+i);
-                let act = i-1;
-                if(act === 0) {
-                    act = max;
-                }
-                let next = i;
-                if(next === 1) {
-                    moveRibbon(0);
-                }
-                if(next === 2) {
-                    moveRibbon((redRibbon / 2) - (middleHeight / 2) + padding);
-                }
-                if(next === 3) {
-                    moveRibbon(redRibbon - middleHeight + (padding * 2));
-                }
-                $(".js-slogan-rest").hide().fadeIn(1000);
+                let text = elem.data("word1");
                 elem.hide().html(text).fadeIn(1000);
-                if(i < max) {
-                    i++;
-                } else {
-                    i = 1;
-                }
-                bar.set(0);
+
+                var bar = new ProgressBar.Circle(".js-progress-circle", {
+                    strokeWidth: 1,
+                    duration: 5000,
+                    color: '#FFF',
+                    trailColor: '#eee',
+                    trailWidth: 0.4,
+                    svgStyle: null
+                });
+
                 bar.animate(1);
-            }, 5000);
-        });
+
+                setInterval(function () {
+                    let text = elem.data("word"+i);
+                    let act = i-1;
+                    if(act === 0) {
+                        act = max;
+                    }
+                    let next = i;
+                    if(next === 1) {
+                        moveRibbon(0);
+                    }
+                    if(next === 2) {
+                        moveRibbon((redRibbon / 2) - (middleHeight / 2) + padding);
+                    }
+                    if(next === 3) {
+                        moveRibbon(redRibbon - middleHeight + (padding * 2));
+                    }
+                    $(".js-slogan-rest").hide().fadeIn(1000);
+                    elem.hide().html(text).fadeIn(1000);
+                    if(i < max) {
+                        i++;
+                    } else {
+                        i = 1;
+                    }
+                    bar.set(0);
+                    bar.animate(1);
+                }, 5000);
+            });
+        }
+
 
         // helper function for moving ribbon
         function moveRibbon(offset) {
@@ -284,7 +346,10 @@
                 zoomDelta: 0.5,
                 scrollWheelZoom	: false,
                 touchZoom:true,
-                dragging:!L.Browser.mobile
+                dragging:!L.Browser.mobile,
+                fullscreenControl: {
+                    pseudoFullscreen: false // if true, fullscreen to page width and height
+                }
             });
 
             L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
@@ -337,17 +402,6 @@
                 {icon: firstIcon}).addTo(map).bindPopup(marker_content);
             latlngs.push([$marker.attr('data-lat'), $marker.attr('data-lng')]);
 
-
-            /* var marker =  L.circleMarker([$marker.attr('data-lat'), $marker.attr('data-lng')], {
-                radius:10,
-                fillColor: $marker[0].color,
-                color: "#000",
-                weight: 2,
-                opacity: 1,
-                fillOpacity: 1,
-            }).addTo(map).bindPopup(marker_content);*/
-
-            //.bindTooltip("1", {permanent: true, className: "my-label", offset: [0, 0], direction: 'center' })
 
             map.markers.push( marker );
         }

@@ -58,7 +58,7 @@ if( $term ): ?>
                   </a>
               <?php } ?>
                 </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mt-3 mt-md-0">
                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn btn--light d-block" role="button">Zur Startseite</a>
             </div>
         </div>

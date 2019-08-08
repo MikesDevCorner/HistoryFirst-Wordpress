@@ -2,7 +2,7 @@
 
 <?php get_header(); ?>
 
-<div class="topic__intro mb-5">
+<div class="topic__intro mb-md-5 mb-3">
     <div class="topic__img-holder js-img-parallax" <?php if(has_post_thumbnail()) { echo "style='background-image:url(".get_the_post_thumbnail_url().")'"; } ?>></div>
     <div class="container">
       <div class="row">
