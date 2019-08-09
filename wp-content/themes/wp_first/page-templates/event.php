@@ -1,4 +1,4 @@
-<?php /* Template Name: Subkapitel/Ereignis */ ?>
+<?php /* Template Name: Ereignis */ ?>
 
 <?php get_header(); ?>
 
@@ -8,8 +8,34 @@
       <div class="row">
         <div class="col-md-12">
           <div class="event__article__date"><?php the_field("date"); ?></div>
-          <h1><?php the_title(); ?></h1>
-          <?php the_content(); ?>
+          <h1 class="js-speech-text"><?php the_title(); ?></h1>
+          <div class="js-speech-text">
+            <?php the_content(); ?>
+          </div>
+
+          <?php if(have_rows("additional-links")) : ?>
+              <div class="topic__linkbox">
+                  <div class="topic__linkbox__links">
+                      <h2 class="h5">Weiterführende Links</h2>
+                    <?php while(have_rows('additional-links')) : the_row(); ?>
+                        <p class="topic__linkbox__link">
+                          <?php $link = get_sub_field('link');
+
+                          if( $link ):
+                            $link_url = $link['url'];
+                            $link_title = $link['title'];
+                            $link_target = $link['target'] ? $link['target'] : '_self';
+                          endif;
+                          ?>
+                            <strong><?php echo esc_html($link_title); ?></strong>
+                            <a href="<?php echo esc_url($link_url); ?>" target="<?php echo esc_attr($link_target); ?>">
+                                <?php echo esc_url($link_url); ?>
+                            </a>
+                        </p>
+                    <?php endwhile; ?>
+                  </div>
+              </div>
+          <?php endif; ?>
         </div>
       </div>
     </div>

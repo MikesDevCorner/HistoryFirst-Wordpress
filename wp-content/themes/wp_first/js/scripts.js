@@ -10,6 +10,9 @@
 	    let loadScreen = $(".js-home-loading");
         let padding = 30;
         let middleHeight, restScreen, redRibbon;
+        let isReading = false;
+        let speechBtn = $(".js-speech-btn");
+        window.speechSynthesis.cancel();
 
         // calc vh dynamically (iOS fix)
         let vh = window.innerHeight * 0.01;
@@ -177,8 +180,10 @@
                 let max = parseInt(elem.data("max"));
                 let i = 2;
 
-                let text = elem.data("word1");
-                elem.hide().html(text).fadeIn(1000);
+                if(sessionStorage.getItem('loaded')) {
+                    let text = elem.data("word1");
+                    elem.hide().html(text).fadeIn(1000);
+                }
 
                 var bar = new ProgressBar.Circle(".js-progress-circle", {
                     strokeWidth: 1,
@@ -234,6 +239,7 @@
            });
         }
 
+        /*
         function changeImg(parent, i,next) {
             let img = parent;
             let imgAct = img.find("img[data-index='"+i+"']");
@@ -251,7 +257,7 @@
                 imgNext.css("opacity", "1");
                 img.removeClass("start");
             }, 600);
-        }
+        }*/
 
         $('.js-inline-svg').each(function(){
             let $img = $(this);
@@ -421,5 +427,38 @@
         $('.js-map').each(function(){
             render_map( $(this) );
         });
+
+
+        // speech synthesis
+        if($('.js-speech-text').length) {
+            if ('speechSynthesis' in window) {
+                speechBtn.show();
+                speechBtn.click(function(){
+                    if(!isReading) {
+                        var text = $('.js-speech-text').text();
+                        var msg = new SpeechSynthesisUtterance();
+                        var voices = window.speechSynthesis.getVoices();
+                        //msg.voice = voices[1]; // 47 = Google Deutsch
+                        msg.rate = 9 / 10;
+                        msg.pitch = 0.5;
+                        msg.text = text;
+
+                        if(speechSynthesis.paused) {
+                            speechSynthesis.resume();
+                        } else {
+                            speechSynthesis.speak(msg);
+                        }
+                        isReading = true;
+                    } else {
+                        speechSynthesis.pause();
+                        isReading = false;
+                    }
+
+                })
+            } else {
+                speechBtn.hide();
+            }
+        }
+
     });
 })( jQuery );

@@ -82,3 +82,47 @@
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(175,56,2,.25);
 }
+
+.topic__linkbox {
+    box-shadow: 0 0 3px rgba(0,0,0,.1);
+    position: relative;
+    min-height: calc(100em/16);
+    width: 100%;
+    margin: 30px 0 0;
+    padding: 20px;
+}
+
+.topic__linkbox .topic__linkbox__links .topic__linkbox__link:last-child {
+    margin-bottom: 0;
+}
+
+.topic__linkbox__img img {
+    width: 50px;
+    max-width: 100%;
+}
+
+.topic__linkbox__link {
+    opacity: .6;
+    transition: opacity 300ms ease;
+}
+
+.topic__linkbox__link:hover {
+    opacity: 1;
+}
+
+.topic__linkbox__links a {
+    font-weight: normal;
+    font-size: calc(13em/16);
+    line-height: 1.4;
+    display: block;
+}
+
+.topic__linkbox__links strong {
+    font-size: calc(14em/16);
+    display: block;
+    text-decoration: none!important;
+}
+
+.topic__linkbox__links a:hover strong {
+    text-decoration: none!important;
+}

@@ -8,8 +8,8 @@
 
 <div class="breadcrumbs">
     <div class="container no-container-md">
-        <div class="row">
-          <div class="col-md-12">
+        <div class="row bg-brown">
+          <div class="col-11">
             <nav class="breadcrumbs-nav">
                 <ol class="list-unstyled">
                   <?php global $post;
@@ -97,6 +97,9 @@
                   } ?>
                 </ol>
             </nav>
+          </div>
+          <div class="col-1 speech">
+              <button class="js-speech-btn"><img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik04IDV2MTRsMTEtN3oiLz4KICAgIDxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz4KPC9zdmc+" alt="Vorlesen lassen"></button>
           </div>
         </div>
     </div>
