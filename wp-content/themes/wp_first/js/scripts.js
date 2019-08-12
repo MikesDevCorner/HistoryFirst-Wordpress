@@ -12,6 +12,7 @@
         let middleHeight, restScreen, redRibbon;
         let isReading = false;
         let speechBtn = $(".js-speech-btn");
+        const colorThief = new ColorThief();
         window.speechSynthesis.cancel();
 
         // calc vh dynamically (iOS fix)
@@ -183,6 +184,9 @@
                 if(sessionStorage.getItem('loaded')) {
                     let text = elem.data("word1");
                     elem.hide().html(text).fadeIn(1000);
+                    setTimeout(function() {
+                        elem.addClass("out");
+                    }, 4500);
                 }
 
                 var bar = new ProgressBar.Circle(".js-progress-circle", {
@@ -212,8 +216,10 @@
                     if(next === 3) {
                         moveRibbon(redRibbon - middleHeight + (padding * 2));
                     }
-                    $(".js-slogan-rest").hide().fadeIn(1000);
-                    elem.hide().html(text).fadeIn(1000);
+                    elem.hide().html(text).show().addClass("in").removeClass("out");
+                    setTimeout(function() {
+                        elem.removeClass("in").addClass("out");
+                    }, 4500);
                     if(i < max) {
                         i++;
                     } else {
@@ -238,26 +244,6 @@
                elem.css("transform", "translateY("+size+"px)");
            });
         }
-
-        /*
-        function changeImg(parent, i,next) {
-            let img = parent;
-            let imgAct = img.find("img[data-index='"+i+"']");
-            let imgNext = img.find("img[data-index='"+next+"']");
-
-            img.addClass("goaway");
-            imgAct.css("opacity", "0");
-            img.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
-                function(e) {
-                    img.removeClass("goaway");
-                    img.addClass("start");
-            });
-
-            setTimeout(function(){
-                imgNext.css("opacity", "1");
-                img.removeClass("start");
-            }, 600);
-        }*/
 
         $('.js-inline-svg').each(function(){
             let $img = $(this);
@@ -292,7 +278,7 @@
         });
 
         // Parallax effect for homepage
-        $('.js-parallax').mousemove(function (e) {
+        /*$('.js-parallax').mousemove(function (e) {
             parallax(e, this, 1);
         }).mouseleave(function (e) {
             $(this).css({'top': '50%' ,'left' : '50%'});
@@ -303,13 +289,21 @@
             var x = ($(window).width() - target.offsetWidth) / 2 - (e.pageX - ($(window).width() / 2)) / layer_coeff;
             var y = ($(window).height() - target.offsetHeight) / 2 - (e.pageY - ($(window).height() / 2)) / layer_coeff;
             $(target).offset({ top: y ,left : x });
+        } */
+
+        if (window.matchMedia("(min-width: 767px)").matches) {
+            $('.js-parallax').mouseenter(function() {
+                $(this).parent().find(".js-progress-circle").addClass("rotate");
+            }).mouseleave(function(){
+                $(this).parent().find(".js-progress-circle").removeClass("rotate");
+            });
         }
 
         $('.js-img-parallax').each(function(){
             var $bgobj = $(this);
 
             $(window).scroll(function() {
-                var yPos = -($(window).scrollTop() / 2);
+                var yPos = -( ($(window).scrollTop() - $bgobj.offset().top) / 1.5);
                 var coords = '50% '+ yPos + 'px';
 
                 $bgobj.css({ backgroundPosition: coords });
@@ -344,6 +338,7 @@
 
         function render_map( $el ) {
             var $markers = $el.find('.js-marker');
+            var $legend = $el.find('.js-legend');
 
             map = L.map($el[0], {
                 minZoom : 0,
@@ -362,18 +357,13 @@
                 attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>'})
                 .addTo(map);
 
-            /*var baseLayers = {
-            "Mapbox": mapbox,
-            "OpenStreetMap": osm
-        };
-        L.control.layers(baseLayers).addTo(map);
-        */
-
             map.markers= [];
 
             $.each($markers, function (index, value) {
                 add_marker( jQuery(this), map);
             });
+
+            create_legend($legend, map);
 
             map.setView([0, 0], 4);
 
@@ -400,22 +390,46 @@
                 popupAnchor:  [0, -17] // point from which the popup should open relative to the iconAnchor
             });
 
-            var marker_content = '<div class="map-property clearfix">'+
-                '<p>'+$marker.find('.js-info').html()+'</p>'+
-                '</div>';
-
             var marker = L.marker([$marker.attr('data-lat'), $marker.attr('data-lng')],
-                {icon: firstIcon}).addTo(map).bindPopup(marker_content);
+                {icon: firstIcon}).addTo(map);
+
+            if($.trim($marker.find('.js-info').html())) { // is not empty?
+                var marker_content = '<div class="map-property clearfix">'+
+                    '<p>'+$marker.find('.js-info').html()+'</p>'+
+                    '</div>';
+
+                marker.bindPopup(marker_content);
+            }
             latlngs.push([$marker.attr('data-lat'), $marker.attr('data-lng')]);
 
 
             map.markers.push( marker );
         }
 
+        function create_legend($legend, map) {
+            var legend = L.control({position: 'bottomright'});
+
+            legend.onAdd = function (map) {
+
+                var div = L.DomUtil.create('div', 'info legend js-show-legend');
+
+                $.each($legend, function (index, value) {
+                    var elem = jQuery(this);
+                    div.innerHTML +=
+                        "<img src='/wp-content/themes/wp_first/img/marker-"+elem.attr('data-color')+".svg'>" +
+                        elem.html() + "<br>";
+                });
+
+                return div;
+            };
+
+            legend.addTo(map);
+        }
+
 
         function center_map( map ) {
             if ( map.markers.length == 1 ) {
-                map.setView(map.markers[0].getLatLng(),15);
+                map.setView(map.markers[0].getLatLng(),12);
                 // map.setZoom( 16 );
             }
             else {
@@ -435,12 +449,13 @@
                 speechBtn.show();
                 speechBtn.click(function(){
                     if(!isReading) {
+                        isReading = true;
                         var text = $('.js-speech-text').text();
                         var msg = new SpeechSynthesisUtterance();
                         var voices = window.speechSynthesis.getVoices();
                         //msg.voice = voices[1]; // 47 = Google Deutsch
                         msg.rate = 9 / 10;
-                        msg.pitch = 0.5;
+                        msg.pitch = 0.75;
                         msg.text = text;
 
                         if(speechSynthesis.paused) {
@@ -448,7 +463,6 @@
                         } else {
                             speechSynthesis.speak(msg);
                         }
-                        isReading = true;
                     } else {
                         speechSynthesis.pause();
                         isReading = false;
@@ -459,6 +473,17 @@
                 speechBtn.hide();
             }
         }
+
+        $(window).load(function() {
+            $(".js-fill-color").each(function () {
+                var elem = $(this);
+                var color = colorThief.getColor(elem.find('.js-get-img-color')[0]);
+
+                elem.css('background-color', 'rgba(' + color + ', .6)');
+                elem.closest(".js-fill-border").css("border-color", 'rgba(' + color + ', .6)');
+                elem.closest(".js-transcript").find(".js-fill-border").css("border-color", 'rgba(' + color + ', .6)');
+            });
+        });
 
     });
 })( jQuery );

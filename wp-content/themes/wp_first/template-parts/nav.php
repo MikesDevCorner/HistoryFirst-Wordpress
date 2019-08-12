@@ -10,7 +10,7 @@
                   <?php endif; ?>
                 </a>
             </div>
-            <div class="col-2 d-flex align-items-center">
+            <div class="col-2 d-flex align-items-center justify-content-end">
                 <?php if ( !is_home() && !is_front_page() ) : ?>
                 <nav class="navbar navbar-expand-lg d-lg-none">
                     <button class="navbar-toggler js-navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">

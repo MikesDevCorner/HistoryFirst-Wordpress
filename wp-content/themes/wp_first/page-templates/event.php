@@ -8,10 +8,13 @@
       <div class="row">
         <div class="col-md-12">
           <div class="event__article__date"><?php the_field("date"); ?></div>
-          <h1 class="js-speech-text"><?php the_title(); ?></h1>
+          <h1 class="js-speech-text"><?php the_title(); ?><span class="sr-only" aria-hidden="true">.</span></h1>
           <div class="js-speech-text">
             <?php the_content(); ?>
           </div>
+          <?php if(get_field("autor")): ?>
+              <div itemprop="author" itemscope itemtype="https://schema.org/Person" class="topic__author">Text: <span itemprop="name"><?php the_field("autor"); ?></span></div>
+          <?php endif; ?>
 
           <?php if(have_rows("additional-links")) : ?>
               <div class="topic__linkbox">

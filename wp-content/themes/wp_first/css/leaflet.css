@@ -685,3 +685,33 @@ svg.leaflet-image-layer.leaflet-interactive path {
         background-image:url(../img/icon-fullscreen-2x.png);
     }
 }
+
+.legend {
+    position: absolute;
+    color: #555;
+    padding: 20px 20px 20px 50px;
+    background: #eee;
+    line-height: 1.8;
+    border: 1px solid var(--color-primary);
+    right: -25vw;
+    bottom: 0;
+    transition: right 300ms ease;
+    width: 30vw;
+    margin: 0!important;
+}
+@media screen and (max-width: 767px) {
+    .legend {
+        padding: 10px 10px 10px 30px;
+        right: -66vw;
+        width: 75vw;
+    }
+}
+.legend:hover {
+    right: 0;
+}
+.legend img {
+    width: calc(18em/16);
+    height: calc(18em/16);
+    float: left;
+    margin-left: calc(-35em/16);
+}

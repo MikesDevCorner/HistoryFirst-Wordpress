@@ -1,15 +1,17 @@
-<div class="full-img my-4">
+<div class="full-img my-4 js-fill-border">
   <?php $image = get_sub_field('bild');
   if( !empty($image) ): ?>
 
-      <figure>
-          <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
+      <a href="<?php echo $image['url']; ?>" data-lightbox="<?php echo $image['id']; ?>" data-title="<?php echo wp_get_attachment_caption($image['id']); ?>">
+      <figure class="js-fill-color">
+          <img class="js-get-img-color" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
           <?php if(wp_get_attachment_caption($image['id'])) : ?>
           <figcaption>
               <?php echo wp_get_attachment_caption($image['id']); ?>
           </figcaption>
           <?php endif; ?>
       </figure>
+      </a>
 
   <?php endif; ?>
 

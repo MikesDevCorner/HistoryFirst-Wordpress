@@ -9,5 +9,15 @@
       </div>
     <?php endwhile; ?>
   <?php endif; ?>
+  <?php if(have_rows('legend')) : ?>
+  <?php while ( have_rows('legend') ) : the_row(); ?>
+        <div class="marker js-legend" data-color="<?php the_sub_field('color'); ?>">
+          <?php the_sub_field("info"); ?>
+        </div>
+  <?php endwhile; ?>
+  <?php endif; ?>
   </div>
+</div>
+<div class="source">
+  <?php echo str_replace(array('<p>','</p>'),'',get_sub_field("quelle")) ?>
 </div>

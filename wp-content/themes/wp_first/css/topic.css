@@ -126,3 +126,10 @@
 .topic__linkbox__links a:hover strong {
     text-decoration: none!important;
 }
+
+.topic__author {
+    opacity: .6;
+    margin: calc(-10em/16) 0 calc(30em/16);
+    font-weight: bold;
+    font-size: calc(13em/16);
+}
