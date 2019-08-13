@@ -99,7 +99,9 @@
             </nav>
           </div>
           <div class="col-md-1 col-3 speech">
-              <button class="js-speech-btn"><img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik04IDV2MTRsMTEtN3oiLz4KICAgIDxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz4KPC9zdmc+" alt="Vorlesen lassen"></button>
+              <button class="js-speech-btn">
+                  <img src="<?php echo get_template_directory_uri(); ?>/img/play.svg" data-change="<?php echo get_template_directory_uri(); ?>/img/pause.svg" alt="Vorlesen lassen">
+              </button>
           </div>
         </div>
     </div>

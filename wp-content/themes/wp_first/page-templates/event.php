@@ -3,7 +3,9 @@
 <?php get_header(); ?>
 
 <div class="topic__intro">
-    <div class="topic__img-holder js-img-parallax" <?php if(has_post_thumbnail($post->post_parent)) { echo "style='background-image:url(".wp_get_attachment_image_src( get_post_thumbnail_id($post->post_parent), 'full' )[0].")'"; } ?>></div>
+    <div class="topic__img-holder js-img-parallax">
+      <?php if(has_post_thumbnail($post->post_parent)) : ?><img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id($post->post_parent), 'full' )[0]; ?>" alt="<?php the_title(); ?>" /><?php endif; ?>
+    </div>
     <div class="container">
       <div class="row">
         <div class="col-md-12">

@@ -13,7 +13,12 @@
         let isReading = false;
         let speechBtn = $(".js-speech-btn");
         const colorThief = new ColorThief();
-        window.speechSynthesis.cancel();
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+        }
+
+        // Polyfill for CSS variables for IE
+        cssVars();
 
         // calc vh dynamically (iOS fix)
         let vh = window.innerHeight * 0.01;
@@ -29,9 +34,6 @@
         if (window.matchMedia("(max-width: 575px)").matches) {
             padding = 15;
         }
-
-        // Polyfill for CSS variables for IE
-        cssVars();
 
         // show load screen at first page load
         if(loadScreen.length) {
@@ -82,7 +84,7 @@
 
         $('.js-navbar-toggler').on('click', function () {
             $('.js-animated-menu-icon').toggleClass('open');
-        }); //TODO
+        });
 
         // open (desktop) menu
         sidebarIcon.mouseenter(function(e) {
@@ -98,7 +100,19 @@
             elem.removeClass("open");
         });
 
-        function sidebarMenu(elem, hover = false, leave = false) {
+        // if sidebar menu stays open, close it with click on body
+        $("body").on("click touchstart", function(e) {
+           if($(".js-sidebar-menu").hasClass("open")) {
+               if(!$(e.target).hasClass('js-sidebar-menu')) {
+                   $(".js-sidebar-menu").removeClass("open");
+               }
+           }
+        });
+
+        //function sidebarMenu(elem, hover = false, leave = false) {
+        function sidebarMenu(elem, hover, leave) {
+            hover = hover || false; //IE fix
+            leave = leave || false; //IE fix
             let actualElemPost = elem.data("post");
             let newContent = $(".js-sidebar-menu-content[data-post='"+actualElemPost+"']");
 
@@ -299,15 +313,25 @@
             });
         }
 
+        // image parallax effect
         $('.js-img-parallax').each(function(){
-            var $bgobj = $(this);
+            var imgParent = $(this);
+
+            function parallaxImg() {
+                if (imgParent.offset().top < $(window).scrollTop()) { // if img is in visible area
+                    // Get ammount of pixels the image is above the top of the window
+                    var difference = $(window).scrollTop() - imgParent.offset().top;
+                    // Top value of image is set to half the amount scrolled
+                    var half = (difference / 2) + 'px';
+                    imgParent.find('img').css('top', half);
+                } else {
+                    imgParent.find('img').css('top', '0');
+                }
+            }
 
             $(window).scroll(function() {
-                var yPos = -( ($(window).scrollTop() - $bgobj.offset().top) / 1.5);
-                var coords = '50% '+ yPos + 'px';
-
-                $bgobj.css({ backgroundPosition: coords });
-            });
+                parallaxImg();
+            })
         });
 
         // Contact form - file upload check
@@ -338,7 +362,7 @@
 
         function render_map( $el ) {
             var $markers = $el.find('.js-marker');
-            var $legend = $el.find('.js-legend');
+            //var $legend = $el.find('.js-legend');
 
             map = L.map($el[0], {
                 minZoom : 0,
@@ -363,7 +387,7 @@
                 add_marker( jQuery(this), map);
             });
 
-            create_legend($legend, map);
+            //create_legend($legend, map);
 
             map.setView([0, 0], 4);
 
@@ -447,7 +471,7 @@
         if($('.js-speech-text').length) {
             if ('speechSynthesis' in window) {
                 speechBtn.show();
-                speechBtn.click(function(){
+                speechBtn.on("click", function(){
                     if(!isReading) {
                         isReading = true;
                         var text = $('.js-speech-text').text();
@@ -468,6 +492,11 @@
                         isReading = false;
                     }
 
+                    // change icon image
+                    var img = speechBtn.find("img");
+                    var imgSrc = img.attr("src");
+                    img.attr("src", img.data("change"));
+                    img.data("change", imgSrc);
                 })
             } else {
                 speechBtn.hide();

@@ -3,7 +3,9 @@
 <?php get_header(); ?>
 
 <div class="topic__intro mb-md-5 mb-3">
-    <div class="topic__img-holder js-img-parallax" <?php if(has_post_thumbnail()) { echo "style='background-image:url(".get_the_post_thumbnail_url().")'"; } ?>></div>
+    <div class="topic__img-holder js-img-parallax">
+        <?php if(has_post_thumbnail()) : ?><img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>" /><?php endif; ?>
+    </div>
     <div class="container">
       <div class="row">
         <div class="col-md-12">

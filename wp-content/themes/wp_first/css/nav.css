@@ -283,7 +283,7 @@
 }
 
 .mobile-menu-content > li:first-child {
-    padding: 20px 0;
+    padding: calc(20em/16) 0;
     border-top: 1px solid #fff;
 }
 
@@ -296,17 +296,16 @@
 }
 
 .mobile-submenu li {
-    padding: 10px 0 10px 4%;
+    padding: calc(10em/16) 0 calc(10em/16) 4%;
 }
 
 .mobile-submenu li:first-child {
-    padding-top: 20px;
+    padding-top: calc(20em/16);
 }
 
 .mobile-submenu a {
     font-family: var(--text-secondary);
-    font-size: 16px;
-
+    font-size: calc(16em/16);
 }
 
 .bg-brown {
@@ -319,6 +318,11 @@
     justify-content: center;
 }
 
+.speech img {
+    width: calc(25em/16);
+    height: calc(25em/16);
+}
+
 .speech button {
     -webkit-appearance: none;
     background: none;
@@ -327,5 +331,5 @@
 }
 
 .speech button:focus {
-    outline-color: #fff;
+    outline: none;
 }
