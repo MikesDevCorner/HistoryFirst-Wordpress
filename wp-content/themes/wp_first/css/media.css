@@ -157,6 +157,9 @@ audio::-webkit-media-controls-enclosure {
     font-size: calc(12em/16);
     width: 100%;
     margin-top: calc(10em/16);
+    background: #fff;
+    position: relative;
+    z-index: 2;
 }
 .source p {
     opacity: .7;
@@ -173,6 +176,10 @@ audio::-webkit-media-controls-enclosure {
     overflow: hidden;
 }
 
+.full-img > a:hover {
+    text-decoration: none;
+}
+
 .full-img:hover img {
     transform: scale(1.1);
 }
@@ -182,8 +189,16 @@ audio::-webkit-media-controls-enclosure {
     margin-bottom: 0;
 }
 
+.img-transcript figcaption {
+    background: none;
+}
+
 .full-img .source {
     padding-bottom: calc(20em/16);
+}
+
+.img-transcript .source {
+    background: none;
 }
 
 .full-img img {

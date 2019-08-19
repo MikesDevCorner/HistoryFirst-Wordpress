@@ -58,7 +58,5 @@ a:hover {
     color: var(--color-default);
 }
 .wysiwyg em {
-    font-size: 0.8em;
     line-height: 1.4;
-    display: inline-block;
 }

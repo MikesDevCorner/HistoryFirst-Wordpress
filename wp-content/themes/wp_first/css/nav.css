@@ -144,7 +144,7 @@
 
 .menu li svg {
     max-width: 100%;
-    height: auto;
+    max-height: 70px;
     overflow: visible !important;
 }
 

@@ -12,10 +12,15 @@
         let middleHeight, restScreen, redRibbon;
         let isReading = false;
         let speechBtn = $(".js-speech-btn");
-        const colorThief = new ColorThief();
+        let speech = "";
+        let msg = "";
+        let paused = false;
+        let restart = true;
         if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
         }
+
+        const colorThief = new ColorThief();
 
         // Polyfill for CSS variables for IE
         cssVars();
@@ -468,33 +473,57 @@
 
 
         // speech synthesis
-        if($('.js-speech-text').length) {
+        if ($('.js-speech-text').length) {
             if ('speechSynthesis' in window) {
-                speechBtn.show();
-                speechBtn.on("click", function(){
-                    if(!isReading) {
-                        isReading = true;
-                        var text = $('.js-speech-text').text();
-                        var msg = new SpeechSynthesisUtterance();
-                        var voices = window.speechSynthesis.getVoices();
-                        //msg.voice = voices[1]; // 47 = Google Deutsch
-                        msg.rate = 9 / 10;
-                        msg.pitch = 0.75;
-                        msg.text = text;
+                speech = window.speechSynthesis;
+                msg = new SpeechSynthesisUtterance();
+                let text = $('.js-speech-text').text();
 
-                        if(speechSynthesis.paused) {
-                            speechSynthesis.resume();
+                speechBtn.show();
+                speechBtn.on("click", function () {
+                    if (!isReading) {
+                        isReading = true;
+
+                        //var voices = speech.getVoices();
+                        //msg.voice = voices[1]; // 47 = Google Deutsch
+
+                        if (paused && !restart) {
+                            //speech.paused not working in Chrome
+                            paused = false;
+                            speech.resume();
                         } else {
-                            speechSynthesis.speak(msg);
+                            restart = false;
+
+                            speech = window.speechSynthesis;
+                            msg = new SpeechSynthesisUtterance();
+                            text = $('.js-speech-text').text();
+                            let sentences = text.split('.'); //TODO
+                            msg.rate = 9 / 10;
+                            msg.pitch = 0.75;
+                            msg.text = sentences;
+                            console.log(sentences);
+                            msg.onend = function (e) {
+                                console.log("Der Text wurde vorgelesen."); //log necessary because of chrome bug
+                                window.speechSynthesis.cancel();
+                                isReading = false;
+                                restart = true;
+                                let img = speechBtn.find("img");
+                                let imgSrc = img.attr("src");
+                                img.attr("src", img.data("change"));
+                                img.data("change", imgSrc);
+                            };
+
+                            speech.speak(msg);
                         }
                     } else {
-                        speechSynthesis.pause();
+                        window.speechSynthesis.pause();
+                        paused = true;
                         isReading = false;
                     }
 
                     // change icon image
-                    var img = speechBtn.find("img");
-                    var imgSrc = img.attr("src");
+                    let img = speechBtn.find("img");
+                    let imgSrc = img.attr("src");
                     img.attr("src", img.data("change"));
                     img.data("change", imgSrc);
                 })
@@ -505,8 +534,8 @@
 
         $(window).load(function() {
             $(".js-fill-color").each(function () {
-                var elem = $(this);
-                var color = colorThief.getColor(elem.find('.js-get-img-color')[0]);
+                let elem = $(this);
+                let color = colorThief.getColor(elem.find('.js-get-img-color')[0]);
 
                 elem.css('background-color', 'rgba(' + color + ', .6)');
                 elem.closest(".js-fill-border").css("border-color", 'rgba(' + color + ', .6)');
