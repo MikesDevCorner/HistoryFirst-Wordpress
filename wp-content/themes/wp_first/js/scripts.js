@@ -108,7 +108,7 @@
         // if sidebar menu stays open, close it with click on body
         $("body").on("click touchstart", function(e) {
            if($(".js-sidebar-menu").hasClass("open")) {
-               if(!$(e.target).hasClass('js-sidebar-menu')) {
+               if(!$(e.target).hasClass('js-sidebar-menu') && !$(e.target).hasClass('js-menu-item')) {
                    $(".js-sidebar-menu").removeClass("open");
                }
            }

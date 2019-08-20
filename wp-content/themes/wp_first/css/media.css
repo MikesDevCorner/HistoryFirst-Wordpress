@@ -187,6 +187,7 @@ audio::-webkit-media-controls-enclosure {
 .full-img figure {
     margin-left: calc(-10em/16);
     margin-bottom: 0;
+    overflow: hidden;
 }
 
 .img-transcript figcaption {

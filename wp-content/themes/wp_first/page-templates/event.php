@@ -8,11 +8,21 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10">
           <div class="event__article__date"><?php the_field("date"); ?></div>
           <h1 class="js-speech-text"><?php the_title(); ?><span class="sr-only" aria-hidden="true">.</span></h1>
           <div class="js-speech-text">
-            <?php the_content(); ?>
+            <?php
+            $content = get_the_content();
+            $content = apply_filters('the_content', $content);
+            $content = str_replace("[fn]","<span class='footnote'>", $content);
+            $content = str_replace("[/fn]","</span>", $content);
+
+            $content = str_replace("[info]","<span class='tooltiptext'>", $content);
+            $content = str_replace("[/info]","</span>", $content);
+
+            echo $content;
+            ?>
           </div>
           <?php if(get_field("autor")): ?>
               <div itemprop="author" itemscope itemtype="https://schema.org/Person" class="topic__author">Text: <span itemprop="name"><?php the_field("autor"); ?></span></div>
