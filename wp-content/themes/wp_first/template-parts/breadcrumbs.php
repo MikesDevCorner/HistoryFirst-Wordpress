@@ -46,7 +46,7 @@
                     } else {
                       $cat = get_the_category();
                       $cat = $cat[0];
-                      $catLink = get_permalink( get_page_by_title( $cat->name ) );
+                      $catLink = get_permalink( get_page_by_path(get_category($cat->category_parent)->slug . "/" . $cat->slug) );
                       echo $delimiterBefore . '<a href="' . $catLink . '">' . $cat->name . '</a> ';
                       //echo get_category_parents($cat, TRUE, ' ' . $delimiterAfter . ' ');
                       echo $delimiterBefore . get_the_title() . $after . $delimiterAfter;

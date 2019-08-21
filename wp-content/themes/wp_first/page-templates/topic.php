@@ -7,8 +7,8 @@
         <?php if(has_post_thumbnail()) : ?><img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>" /><?php endif; ?>
     </div>
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
           <h1 class="js-speech-text"><?php the_title(); ?><span class="sr-only" aria-hidden="true">.</span></h1>
           <div class="js-speech-text">
             <?php the_content(); ?>
@@ -30,8 +30,8 @@
 
   <div class="container mb-5">
     <?php if(have_rows("additional-links")) : ?>
-      <div class="row mb-3 mb-md-4">
-        <div class="col-md-10">
+      <div class="row justify-content-center mb-3 mb-md-4">
+        <div class="col-md-12">
             <div class="topic__linkbox">
                 <div class="topic__linkbox__links">
                     <h2 class="h5">Weiterführende Links</h2>

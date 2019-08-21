@@ -71,6 +71,13 @@
         border-top-right-radius: 0!important;
         border-bottom-right-radius: 1em;
     }
+    .event__article__date {
+        font-size: calc(26em/16);
+    }
+    .topic__intro h1 {
+        font-size: calc(24em/16);
+        margin-bottom: calc(10em/16);
+    }
 }
 .event__img {
     width: 100%;

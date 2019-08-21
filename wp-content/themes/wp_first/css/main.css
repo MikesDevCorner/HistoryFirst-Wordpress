@@ -40,6 +40,12 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
 p {
     font-size: 1.2em;
 }
+@media screen and (max-width: 767px) {
+    p {
+        font-size: calc(18em/16);
+        line-height: 1.4;
+    }
+}
 img {
     max-width: 100%;
 }

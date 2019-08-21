@@ -25,6 +25,17 @@
         // Polyfill for CSS variables for IE
         cssVars();
 
+        let pageTitle = $("title");
+        let orgTitle = pageTitle.text();
+
+        $(window).blur(function() {
+            pageTitle.text("Geschichte wartet ... – history.first");
+        });
+        $(window).focus(function() {
+            pageTitle.text(orgTitle);
+        });
+
+
         // calc vh dynamically (iOS fix)
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', vh+'px');
@@ -54,7 +65,7 @@
 
                 $(".js-slogan").each(function() {
                     let elem = $(this);
-                    let text = "Unsere<br>Geschichte<br>lädt";
+                    let text = "Geschichte<br>laden";
                     elem.hide().html(text).fadeIn(1000);
 
                     var bar = new ProgressBar.Circle(".js-progress-circle", {

@@ -5,7 +5,7 @@
             <?php if( have_rows('words') ): $i = 1; $words = ""; ?>
                 <?php while(have_rows('words') ) : the_row(); ?>
                     <?php if($i === 1) { $first = get_sub_field('word'); } ?>
-                    <?php $words .= "data-word".$i."='".get_sub_field('word')."'"  ?>
+                    <?php $words .= " data-word".$i."='".get_sub_field('word')."'"  ?>
                     <?php $i++; ?>
                 <?php endwhile; ?>
                 <span class="js-slogan" data-max="<?php echo $i-1; ?>" <?php echo $words; ?>>&nbsp;</span>

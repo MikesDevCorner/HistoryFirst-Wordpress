@@ -29,6 +29,17 @@
         padding: calc(10em / 16) 0;
     }
 }
+@media screen and (max-width: 991px) {
+    .breadcrumbs-nav li:not(:nth-last-child(2)) {
+        display: none;
+    }
+    .breadcrumbs-nav li:nth-last-child(2):before {
+        content: "< ";
+    }
+    .breadcrumbs-nav li:nth-last-child(2):after {
+        display: none;
+    }
+}
 
 .navbar {
     padding-right: 0;
@@ -112,7 +123,20 @@
         background: rgba(32, 32, 30, .95);
         padding-left: 30px;
         padding-top: 20vh;
+        opacity: 0;
+        height: 0!important;
+        transition: all 300ms ease;
         z-index: 999;
+    }
+
+    .collapse:not(.show) {
+        display: block;
+        pointer-events: none;
+    }
+
+    .navbar-collapse.show {
+        opacity: 1;
+        height: 100%!important;
     }
 
     .navbar-collapse a {
