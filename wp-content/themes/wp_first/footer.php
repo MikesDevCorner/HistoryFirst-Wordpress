@@ -15,7 +15,7 @@
                     <div class="footer__logo">
                         <?php $link = get_sub_field("link"); ?>
                         <?php if($link) : $link_target = $link['target'] ? $link['target'] : '_self'; ?>
-                            <a href="<?php echo esc_url($link['url']); ?>" target="<?php echo esc_attr($link_target); ?>">
+                            <a href="<?php echo esc_url($link['url']); ?>" target="<?php echo esc_attr($link_target); ?>" rel="noopener">
                         <?php endif; ?>
                         <img src="<?php echo get_sub_field("logos")['url']; ?>" alt="<?php echo get_sub_field("logos")['alt']; ?>" />
                         <?php if($link) : ?></a><?php endif; ?>

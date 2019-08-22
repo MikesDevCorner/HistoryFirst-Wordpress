@@ -22,7 +22,7 @@ header {
 }
 header .logo {
     display: block;
-    padding: calc(16em/16) calc(64em/16);
+    padding: calc(20em/16) calc(64em/16) calc(14em/16);
 }
 .logo img {
     max-width: calc(265em/16);

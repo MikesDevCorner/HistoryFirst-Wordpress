@@ -29,7 +29,13 @@
         let orgTitle = pageTitle.text();
 
         $(window).blur(function() {
-            pageTitle.text("Geschichte wartet ... – history.first");
+            pageTitle.text("Geschichte wartet . – history.first");
+            setTimeout(function () {
+                pageTitle.text("Geschichte wartet .. – history.first");
+            }, 1000);
+            setTimeout(function () {
+                pageTitle.text("Geschichte wartet ... – history.first");
+            }, 2000);
         });
         $(window).focus(function() {
             pageTitle.text(orgTitle);
@@ -489,6 +495,7 @@
                 speech = window.speechSynthesis;
                 msg = new SpeechSynthesisUtterance();
                 let text = $('.js-speech-text').text();
+                let spoken = false;
 
                 speechBtn.show();
                 speechBtn.on("click", function () {
@@ -507,8 +514,21 @@
 
                             speech = window.speechSynthesis;
                             msg = new SpeechSynthesisUtterance();
+                            // bug fix that chrome don't stop at first page load
+                            if (!spoken) {
+                                let mt = new SpeechSynthesisUtterance();
+                                mt.text = " ";
+                                window.speechSynthesis.speak(mt);
+                                spoken = true;
+                            }
                             text = $('.js-speech-text').text();
                             let sentences = text.split('.'); //TODO
+                            //TODO test
+                            /*setTimeout(function() {
+                                speechSynthesis.pause();
+                                speechSynthesis.resume();
+                            }, 10000);*/
+
                             msg.rate = 9 / 10;
                             msg.pitch = 0.75;
                             msg.text = sentences;

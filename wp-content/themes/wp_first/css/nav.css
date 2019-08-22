@@ -1,6 +1,7 @@
 ﻿
 .breadcrumbs-nav {
-    padding: calc(10em / 16) calc(64em / 16);
+    padding: calc(10em / 16) calc(64rem / 16);
+    font-size: calc(14em/16);
     /*margin-bottom: -100%*/
 }
 

@@ -46,6 +46,13 @@
                     } else {
                       $cat = get_the_category();
                       $cat = $cat[0];
+
+                      $parent = get_category($cat->category_parent);
+                      if($parent) {
+                        $catLinkParent = get_permalink( get_page_by_path($parent->slug) );
+                        echo $delimiterBefore . '<a href="' . $catLinkParent . '">' . $parent->name . '</a> ';
+                      }
+
                       $catLink = get_permalink( get_page_by_path(get_category($cat->category_parent)->slug . "/" . $cat->slug) );
                       echo $delimiterBefore . '<a href="' . $catLink . '">' . $cat->name . '</a> ';
                       //echo get_category_parents($cat, TRUE, ' ' . $delimiterAfter . ' ');
