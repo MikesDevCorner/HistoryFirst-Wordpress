@@ -8,6 +8,7 @@
         let micons = $(".js-icon-list");
         let content = $(".js-sidebar-menu-content");
 	    let loadScreen = $(".js-home-loading");
+	    let touchInfo = $(".js-show-touchinfo");
         let padding = 30;
         let middleHeight, restScreen, redRibbon;
         let isReading = false;
@@ -62,11 +63,13 @@
             if(sessionStorage.getItem('loaded')) {
               loadScreen.hide();
               startCircles();
+              touchInfo.addClass("active");
             } else {
                 var start = false;
                 $(window).load(function () {
                     start = true;
                     sessionStorage.setItem('loaded', 'true');
+                    touchInfo.addClass("active");
                 });
 
                 $(".js-slogan").each(function() {
