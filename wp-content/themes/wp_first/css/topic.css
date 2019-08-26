@@ -15,7 +15,7 @@
     transition: all 300ms ease;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 47.99rem) {
     .topic__img-holder {
         max-height: calc(200rem / 16);
     }
@@ -51,12 +51,12 @@
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 1));
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 61.99rem) {
     .topic__intro {
         padding: 3rem 0;
     }
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 47.99rem) {
     .topic__intro {
         padding: 1.5rem 0;
     }
@@ -72,15 +72,29 @@
     transition: all 300ms ease;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 61.99rem) {
     .btn {
-        padding: calc(10em/16) calc(5em/16);
+        padding: calc(15em/16);
     }
+}
+
+@media screen and (max-width: 47.99rem) {
+    .btn {
+        padding: calc(7em/16) calc(10em/16);
+        font-size: 0.9em;
+    }
+}
+
+.back-btn .btn {
+    display: flex!important;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
 }
 
 .btn:hover {
     background: #fff;
-    color: var(--color-default);
+    color: var(--color-primary);
     border-color: var(--color-primary);
     font-weight: bold;
 }
@@ -93,10 +107,13 @@
 #btnContactUs.btn:not(:disabled) {
     background-color: var(--color-default)!important;
     color: #fff!important;
+    border: 1px solid var(--color-default)!important;
 }
 #btnContactUs.btn:not(:disabled):hover {
     background-color: #fff!important;
-    color: var(--color-default)!important;
+    color: var(--color-primary)!important;
+    border-color: var(--color-primary)!important;
+    font-weight: bold;
 }
 
 .btn--light {
@@ -127,20 +144,17 @@
     max-width: 100%;
 }
 
-.topic__linkbox__link {
-    opacity: .6;
-    transition: opacity 300ms ease;
-}
-
-.topic__linkbox__link:hover {
-    opacity: 1;
-}
-
 .topic__linkbox__links a {
     font-weight: normal;
     font-size: calc(13em/16);
     line-height: 1.4;
     display: block;
+    opacity: .6;
+    transition: opacity 300ms ease;
+}
+
+.topic__linkbox__links a:hover {
+    opacity: 1;
 }
 
 .topic__linkbox__links strong {

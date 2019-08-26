@@ -14,7 +14,13 @@
     transform: scale(1.03);
 }
 .event article:hover a {
-    color: var(--color-primary-light);
+    color: var(--color-primary);
+}
+.event article a:hover {
+    text-decoration: none;
+}
+.event__article__link {
+    margin-top: calc(20em/16);
 }
 .event__article {
     padding: calc(50em/16);
@@ -51,7 +57,7 @@
 .event article:nth-child(even) .event__article{
     order: 2;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 47.99rem) {
     .event__article {
         padding: calc(20em/16);
     }

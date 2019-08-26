@@ -97,3 +97,7 @@ div.wpcf7-validation-errors, div.wpcf7-acceptance-missing {
     display: inline-block;
     padding-left: calc(5em/16);
 }
+
+.form-control:focus {
+    border-color: var(--color-primary);
+}

@@ -82,12 +82,12 @@ body.home main {
 
 
 
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 74.99rem) {
     .homescreen-slogan {
         font-size: 5.5vw;
     }
 }
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 35.99rem) {
     .homescreen-slogan {
         font-size: calc(30em/16);
     }
@@ -110,7 +110,7 @@ body.home main {
 }
 
 .homescreen__circle.rotate svg {
-    animation: rotate-scale 2s cubic-bezier(0.445, 0.050, 0.550, 0.950) infinite forwards;
+    animation: rotate-scale 2s cubic-bezier(0.445, 0.050, 0.550, 0.950) forwards;
 }
 
 @keyframes rotate-scale {
@@ -134,7 +134,8 @@ body.home main {
     cursor: pointer;
 }
 .home-topic:hover .home-topic__title {
-    transform: translateX(-50%) scale(1.15);
+    transform: translateX(-50%) scale(1.05);
+    text-shadow: 0 0 calc(5em / 16) #fff;
 }
 
 .home-topic__title {
@@ -163,7 +164,7 @@ body.home main {
     color: #fff;
     text-decoration: none;
 }
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 35.99rem) {
     .home-topic__title {
         font-size: calc(15em/16);
         text-align: right;
@@ -185,7 +186,7 @@ body.home main {
         transform: none;
     }
 }
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 21.875rem) {
     .home-topic__title {
         font-size: calc(11em / 16);
     }
@@ -285,7 +286,7 @@ body.home main {
     min-height:100%;
     height:auto;
 }
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 35.99rem) {
     .red-ribbon__content {
         right: calc(-15em/16);
         left: calc(-15em/16);
@@ -312,7 +313,7 @@ body.home main {
 
 .homescreen-touchinfo {
     position: absolute;
-    bottom: calc(-40em/16);
+    bottom: calc(-170em/16);
     left: 50%;
     transform: translateX(-50%);
     font-size: calc(11rem/16);
@@ -326,14 +327,14 @@ body.home main {
 }
 .homescreen-touchinfo img {
     display: block;
-    margin: 0 auto calc(5em/16);
-    width: calc(30em/16);
+    margin: 0 auto 0;
+    width: calc(20em/16);
     opacity: 1;
 
     position: absolute;
-    bottom: calc(-40em/16);
+    bottom: calc(30em/16);
     left: 50%;
-    transform: translateX(-50%) rotate(45deg);
+    transform: translateX(-50%) rotate(0deg);
 
     animation: slide-mouse 5s cubic-bezier(0.250, 0.460, 0.450, 0.940) infinite both;
 }
@@ -341,26 +342,26 @@ body.home main {
 @keyframes slide-mouse {
     0% {
         opacity: 1;
-        transform: translateY(0) translateX(-50%) rotate(45deg);
+        transform: translateY(0) translateX(-50%) rotate(0deg) scale(1);
     }
 
     25% {
         opacity: .7;
-        transform: translateY(10%) translateX(-200%) rotate(0);
+        transform: translateY(10%) translateX(-200%) rotate(-45deg) scale(0.9);
     }
 
     50% {
         opacity: 1;
-        transform: translateY(0) translateX(-50%) rotate(45deg);
+        transform: translateY(0) translateX(-50%) rotate(0deg) scale(1);
     }
 
     75% {
         opacity: .7;
-        transform: translateY(10%) translateX(150%) rotate(90deg);
+        transform: translateY(10%) translateX(150%) rotate(45deg) scale(0.9);
     }
 
     100% {
         opacity: 1;
-        transform: translateY(0) translateX(-50%) rotate(45deg);
+        transform: translateY(0) translateX(-50%) rotate(0deg) scale(1);
     }
 }

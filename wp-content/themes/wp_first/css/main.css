@@ -36,11 +36,12 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
     color: var(--color-primary);
     font-size: 1.8em;
     font-weight: normal;
+    /*font-variant-ligatures: none;*/
 }
 p {
     font-size: 1.2em;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 47.99rem) {
     p {
         font-size: calc(18em/16);
         line-height: 1.4;
@@ -55,13 +56,26 @@ b, strong {
 main {
     position: relative;
 }
+::-moz-selection { 
+    color: #fff;
+    background-color: var(--color-primary); 
+}
+::selection { 
+    color: #fff;
+    background-color: var(--color-primary); 
+}
+:focus {
+    outline-color: var(--color-primary-light); 
+}
 
 a {
     color: var(--color-default);
     font-weight: bold;
+    transition: color 300ms ease;
 }
 a:hover {
-    color: var(--color-default);
+    color: var(--color-primary);
+    text-decoration: none;
 }
 .wysiwyg em {
     line-height: 1.4;

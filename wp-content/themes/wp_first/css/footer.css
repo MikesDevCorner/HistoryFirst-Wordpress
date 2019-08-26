@@ -10,7 +10,8 @@
     color: #fff;
 }
 .footer--home a:hover {
-    color: #fefefe;
+    color: #fff;
+    text-shadow: 0 0 calc(5em / 16) #fff;
 }
 .footer p {
     font-size: calc(16em/16);

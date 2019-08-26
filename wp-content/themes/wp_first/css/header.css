@@ -4,7 +4,10 @@ header {
     background: rgba(255,255,255,0.5);
     z-index: 5;
 }
-@media screen and (max-width: 991px) {
+header.home-header {
+    pointer-events: none;
+}
+@media screen and (max-width: 61.99rem) {
     header {
         position: relative;
         background: none;
@@ -14,7 +17,7 @@ header {
     position: relative;
     background: none;
 }
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 35.99rem) {
     .row--header {
         margin-left: calc(-50em/16);
         margin-right: calc(-50em/16);
@@ -22,19 +25,20 @@ header {
 }
 header .logo {
     display: block;
+    pointer-events: auto;
     padding: calc(20em/16) calc(64em/16) calc(14em/16);
 }
 .logo img {
     max-width: calc(265em/16);
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 47.99rem) {
     .logo img {
         max-width: calc(160em/16);
         width: 100%;
     }
 }
 
-@media screen and (min-width: 1071px) {
+@media screen and (min-width: 66.88rem) {
     .no-container-md {
         max-width: none!important;
         margin: 0 auto!important;
@@ -42,13 +46,8 @@ header .logo {
     }
 }
 
-@media screen and (max-width: 1070px) {
+@media screen and (max-width: 66.875rem) {
     header .logo {
         padding: calc(16em/16) 0;
-    }
-    @media screen and (min-width: 992px) {
-        header .logo {
-            padding-left: calc(10em/16);
-        }
     }
 }

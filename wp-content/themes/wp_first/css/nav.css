@@ -14,9 +14,13 @@
     color: #fff;
 }
 
-.breadcrumbs-nav a, .breadcrumbs-nav a:hover {
+.breadcrumbs-nav a {
     color: #fff;
     font-weight: normal;
+}
+.breadcrumbs-nav a:hover {
+    color: #fff;
+    text-shadow: 0 0 calc(5em / 16) #fff;
 }
 
 .breadcrumbs-nav ol li:not(:last-child):after {
@@ -24,13 +28,13 @@
     padding: 0 calc(2em / 16) 0 0;
 }
 
-@media screen and (max-width: 1070px) {
+@media screen and (max-width: 66.875rem) {
     .breadcrumbs-nav {
         background: none;
         padding: calc(10em / 16) 0;
     }
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 61.99rem) {
     .breadcrumbs-nav li:not(:nth-last-child(2)) {
         display: none;
     }
@@ -113,7 +117,7 @@
     transform-origin: bottom left;
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 61.99rem) {
     .navbar-collapse {
         color: #fff;
         position: fixed;
@@ -152,6 +156,7 @@
     bottom: calc(20em / 16);
     width: 70px;
     z-index: 90;
+    padding:2px;
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
 }
@@ -171,6 +176,7 @@
     max-width: 100%;
     max-height: 70px;
     overflow: visible !important;
+    outline: 30px solid transparent;    
 }
 
 .menu li svg path, .menu li svg .st1 {
@@ -179,27 +185,29 @@
 
 .menu li img, .menu li svg {
     /*filter: drop-shadow(0 0 calc(4em/16) rgba(0,0,0,.7));  fix iOS */
-    box-shadow: 0 0 calc(15em / 16) calc(-5em / 16) #000;
+    /*box-shadow: 0 0 calc(15em / 16) calc(-5em / 16) #000;*/
     border-radius: 50%;
     transition: all 300ms ease;
 }
 
 .menu li:hover img, .menu li:hover svg {
     transform: scale(1.05);
+    
     /*filter: drop-shadow(0 0 calc(4em/16) #fff);*/
-    box-shadow: 0 0 calc(15em / 16) calc(-5em / 16) #fff;
+    /*box-shadow: 0 0 calc(15em / 16) calc(-5em / 16) #fff;*/
 }
 
 .menu li:hover svg path, .menu li.activeP svg path, .menu a.active svg path,
 .menu li:hover svg .st1, .menu li.activeP svg .st1, .menu a.active svg .st1 {
     fill: var(--color-primary);
+    
 }
 
 .menu li:not(:last-child) {
     margin-bottom: calc(15em / 16);
 }
 
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 74.99rem) {
     .menu {
         width: calc(50em / 16);
     }
@@ -217,7 +225,7 @@
     height: 100vh;
     width: 30%;
     max-width: calc(350em / 16);
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
     transform: translateX(100%);
     transition: all 500ms ease;
 }
@@ -279,11 +287,11 @@
     color: #fff;
     font-weight: normal;
     transition: all 300ms ease;
+    font-variant-numeric: lining-nums;
 }
 
-.overlay > ul li a:hover, .overlay > ul li.main-item.active > a {
-    text-shadow: 0 0 calc(5em / 16) var(--color-primary);
-    font-weight: bold;
+.overlay > ul li a:hover, .overlay > ul li.main-item.active > a, .overlay > ul li.activeUpload.active > a {
+    text-shadow: 0 0 calc(5em / 16) #fff;
 }
 
 .overlay ul.submenu li a:hover {
