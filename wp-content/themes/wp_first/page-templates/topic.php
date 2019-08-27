@@ -7,8 +7,8 @@
         <?php if(has_post_thumbnail()) : ?><img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>" /><?php endif; ?>
     </div>
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-10 col-xl-9">
           <h1 class="js-speech-text"><?php the_title(); ?><span class="sr-only" aria-hidden="true">.</span></h1>
           <div class="js-speech-text">
             <?php the_content(); ?>

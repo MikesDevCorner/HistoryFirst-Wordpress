@@ -207,3 +207,7 @@ function acf_admin_head() {
 }
 
 add_action('acf/input/admin_head', 'acf_admin_head');
+
+// REMOVE WP EMOJI
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');

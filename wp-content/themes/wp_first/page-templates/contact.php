@@ -14,12 +14,13 @@
     </div>
 </div>
 
+<?php $shortcode = get_field("contact-form-7"); ?>
+<?php if($shortcode) : ?>
 <section>
   <div class="text-center">
-          <?php $shortcode = get_field("contact-form-7"); ?>
-          <?php echo do_shortcode($shortcode); ?>
+    <?php echo do_shortcode($shortcode); ?>
   </div>
-
 </section>
+<?php endif; ?>
 
 <?php get_footer(); ?>

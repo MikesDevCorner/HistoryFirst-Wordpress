@@ -12,14 +12,9 @@
         let padding = 30;
         let middleHeight, restScreen, redRibbon;
         let isReading = false;
-        let speechBtn = $(".js-speech-btn");
-        let speech = "";
         let msg = "";
         let paused = false;
         let restart = true;
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.cancel();
-        }
 
         const colorThief = new ColorThief();
 
@@ -28,20 +23,29 @@
 
         let pageTitle = $("title");
         let orgTitle = pageTitle.text();
+        let windowFocus;
 
-        $(window).blur(function() {
-            pageTitle.text("Geschichte wartet . – history.first");
-            setTimeout(function () {
-                pageTitle.text("Geschichte wartet .. – history.first");
-            }, 1000);
-            setTimeout(function () {
-                pageTitle.text("Geschichte wartet ... – history.first");
-            }, 2000);
-        });
         $(window).focus(function() {
+            windowFocus = true;
             pageTitle.text(orgTitle);
+        }).blur(function() {
+            windowFocus = false;
+            changeTitle();
         });
 
+        function changeTitle() {
+            setTimeout(function () {
+                if(!windowFocus) {
+                    pageTitle.text("Geschichte wartet ... – history.first");
+                    setTimeout(function () {
+                        if(!windowFocus) {
+                            pageTitle.text(orgTitle);
+                            changeTitle();
+                        }
+                    }, 3000);
+                }
+            }, 3000);
+        }
 
         // calc vh dynamically (iOS fix)
         let vh = window.innerHeight * 0.01;
@@ -126,12 +130,15 @@
         });
 
         // if sidebar menu stays open, close it with click on body
-        $("body").on("click touchstart", function(e) {
+       /* $("body").on("click touchstart", function(e) {
            if($(".js-sidebar-menu").hasClass("open")) {
                if(!$(e.target).hasClass('js-sidebar-menu') && !$(e.target).hasClass('js-menu-item')) {
                    $(".js-sidebar-menu").removeClass("open");
                }
            }
+        }); */
+        $(".js-menu-item").click(function(e) {
+           e.preventDefault();
         });
 
         //function sidebarMenu(elem, hover = false, leave = false) {
@@ -159,7 +166,7 @@
         }
 
         // mobile menu
-        $(".js-open-mobile-submenu").click(function(e) {
+        /*$(".js-open-mobile-submenu").click(function(e) {
             let elem = $(this);
             if(!$(e.target).closest('.js-mobile-submenu').length) {
                 if(elem.hasClass("open-submenu") || elem.hasClass("no-sub-items")) {
@@ -169,6 +176,20 @@
                 $(".open-submenu").removeClass("open-submenu");
                 $(".js-mobile-submenu.open").removeClass("open").slideUp();
                 elem.addClass("open-submenu");
+                elem.parent().find($(".js-mobile-submenu")).addClass("open").slideDown();
+            }
+        });*/
+        
+        $(".js-open-mobile-submenu").on('click', function(e) {
+            let elem = $(this);
+            if(!$(e.target).closest('.js-mobile-submenu').length) {
+                if(elem.hasClass("open-submenu") || elem.hasClass("no-sub-items")) {
+                    location.href = $(this).find('a:first').attr('href');
+                }
+                e.preventDefault();
+                $(".open-submenu").removeClass("open-submenu");
+                $(".js-mobile-submenu.open").removeClass("open").slideUp();
+                elem.toggleClass("open-submenu");
                 elem.parent().find($(".js-mobile-submenu")).addClass("open").slideDown();
             }
         });
@@ -316,26 +337,21 @@
             }, 'xml');
         });
 
-        // Parallax effect for homepage
-        /*$('.js-parallax').mousemove(function (e) {
-            parallax(e, this, 1);
-        }).mouseleave(function (e) {
-            $(this).css({'top': '50%' ,'left' : '50%'});
-        });
-
-        function parallax(e, target, layer) {
-            var layer_coeff = 10 / layer;
-            var x = ($(window).width() - target.offsetWidth) / 2 - (e.pageX - ($(window).width() / 2)) / layer_coeff;
-            var y = ($(window).height() - target.offsetHeight) / 2 - (e.pageY - ($(window).height() / 2)) / layer_coeff;
-            $(target).offset({ top: y ,left : x });
-        } */
-
         if (window.matchMedia("(min-width: 767px)").matches) {
             $('.js-parallax').mouseenter(function() {
-                $(this).parent().find(".js-progress-circle").addClass("rotate");
-            }).mouseleave(function(){
-                $(this).parent().find(".js-progress-circle").removeClass("rotate");
+                var circle = $(this).parent().find(".js-progress-circle");
+
+                if(!circle.hasClass("rotate")) {
+                    circle.addClass("rotate");
+                    resetCircleRotation(circle);
+                }
             });
+        }
+
+        function resetCircleRotation(elem) {
+            setTimeout(function() {
+                elem.removeClass("rotate");
+            }, 2000);
         }
 
         // image parallax effect
@@ -489,92 +505,6 @@
 
         $('.js-map').each(function(){
             render_map( $(this) );
-        });
-
-
-        // speech synthesis
-        if ($('.js-speech-text').length) {
-            if ('speechSynthesis' in window) {
-                speech = window.speechSynthesis;
-                msg = new SpeechSynthesisUtterance();
-                let text = $('.js-speech-text').text();
-                let spoken = false;
-
-                speechBtn.show();
-                speechBtn.on("click", function () {
-                    if (!isReading) {
-                        isReading = true;
-
-                        //var voices = speech.getVoices();
-                        //msg.voice = voices[1]; // 47 = Google Deutsch
-
-                        if (paused && !restart) {
-                            //speech.paused not working in Chrome
-                            paused = false;
-                            speech.resume();
-                        } else {
-                            restart = false;
-
-                            speech = window.speechSynthesis;
-                            msg = new SpeechSynthesisUtterance();
-                            // bug fix that chrome don't stop at first page load
-                            if (!spoken) {
-                                let mt = new SpeechSynthesisUtterance();
-                                mt.text = " ";
-                                window.speechSynthesis.speak(mt);
-                                spoken = true;
-                            }
-                            text = $('.js-speech-text').text();
-                            let sentences = text.split('.'); //TODO
-                            //TODO test
-                            /*setTimeout(function() {
-                                speechSynthesis.pause();
-                                speechSynthesis.resume();
-                            }, 10000);*/
-
-                            msg.rate = 9 / 10;
-                            msg.pitch = 0.75;
-                            msg.text = sentences;
-                            console.log(sentences);
-                            msg.onend = function (e) {
-                                console.log("Der Text wurde vorgelesen."); //log necessary because of chrome bug
-                                window.speechSynthesis.cancel();
-                                isReading = false;
-                                restart = true;
-                                let img = speechBtn.find("img");
-                                let imgSrc = img.attr("src");
-                                img.attr("src", img.data("change"));
-                                img.data("change", imgSrc);
-                            };
-
-                            speech.speak(msg);
-                        }
-                    } else {
-                        window.speechSynthesis.pause();
-                        paused = true;
-                        isReading = false;
-                    }
-
-                    // change icon image
-                    let img = speechBtn.find("img");
-                    let imgSrc = img.attr("src");
-                    img.attr("src", img.data("change"));
-                    img.data("change", imgSrc);
-                })
-            } else {
-                speechBtn.hide();
-            }
-        }
-
-        $(window).load(function() {
-            $(".js-fill-color").each(function () {
-                let elem = $(this);
-                let color = colorThief.getColor(elem.find('.js-get-img-color')[0]);
-
-                elem.css('background-color', 'rgba(' + color + ', .6)');
-                elem.closest(".js-fill-border").css("border-color", 'rgba(' + color + ', .6)');
-                elem.closest(".js-transcript").find(".js-fill-border").css("border-color", 'rgba(' + color + ', .6)');
-            });
         });
 
     });

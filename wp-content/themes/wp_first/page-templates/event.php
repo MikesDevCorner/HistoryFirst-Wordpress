@@ -8,7 +8,7 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-10 col-xl-9">
           <div class="event__article__date"><?php the_field("date"); ?></div>
           <h1 class="js-speech-text"><?php the_title(); ?><span class="sr-only" aria-hidden="true">.</span></h1>
           <div class="js-speech-text">
@@ -90,12 +90,12 @@ if( $term ): ?>
     <?php endif; wp_reset_query(); ?>
 
     <div class="mb-5">
-        <div class="row text-center justify-content-center">
+        <div class="row text-center justify-content-center back-btn">
             <div class="col-md-6">
               <?php global $post;
               if ( $post->post_parent ) { ?>
                   <a href="<?php echo get_permalink( $post->post_parent ); ?>" class="btn d-block" role="button">
-                      Zurück
+                      Zu "<?php echo get_post($post->post_parent)->post_title; ?>"
                   </a>
               <?php } ?>
                 </div>

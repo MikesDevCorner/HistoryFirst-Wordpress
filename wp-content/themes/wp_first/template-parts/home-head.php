@@ -11,7 +11,10 @@
                 <span class="js-slogan" data-max="<?php echo $i-1; ?>" <?php echo $words; ?>>&nbsp;</span>
             <?php endif; ?>
             <div class="d-md-none homescreen-touchinfo js-show-touchinfo">
-                <img src="/wp-content/themes/wp_first/img/tap.svg" aria-hidden="true" />Wähle deine Geschichte.
+                <div class="homescreen-touchinfo__transform">
+                    <img src="/wp-content/themes/wp_first/img/mouse.svg" aria-hidden="true" />
+                </div>
+                Wähle deine Geschichte.
             </div>
         </span>
     </div>

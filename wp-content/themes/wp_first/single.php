@@ -3,13 +3,13 @@ $cat = get_the_category()[0];
 $parentCat = get_page_by_path(get_category($cat->category_parent)->slug);
 ?>
 
-<div class="topic__intro mb-3 mb-md-5">
+<div class="topic__intro">
     <div class="topic__img-holder js-img-parallax">
       <?php if(has_post_thumbnail($parentCat)) : ?><img src="<?php echo wp_get_attachment_image_src( get_post_thumbnail_id($parentCat), 'full' )[0]; ?>" alt="<?php the_title(); ?>" /><?php endif; ?>
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-10 col-xl-9">
           <h1><?php the_title(); ?></h1>
           <p><?php the_field("teaser"); ?></p>
         </div>
@@ -19,8 +19,8 @@ $parentCat = get_page_by_path(get_category($cat->category_parent)->slug);
 
 <section>
     <div class="container mb-3 mb-md-5">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-12">
               <?php the_content(); ?>
               <?php if ( have_rows( 'layout' ) ):
                 while ( have_rows( 'layout' ) ) : the_row();
@@ -32,10 +32,11 @@ $parentCat = get_page_by_path(get_category($cat->category_parent)->slug);
     </div>
 
     <div class="container mb-3 mb-md-5">
-        <div class="row text-center justify-content-center">
+        <div class="row text-center justify-content-center back-btn">
             <div class="col-md-6">
               <?php global $post;
-              $backLink = get_permalink(get_page_by_path(get_category($cat->category_parent)->slug . "/" . $cat->slug));
+              $backPage = get_page_by_path(get_category($cat->category_parent)->slug . "/" . $cat->slug);
+              $backLink = get_permalink($backPage);
 
               if ( $backLink ) { ?>
                   <a href="<?php echo $backLink; ?>" class="btn d-block" role="button">

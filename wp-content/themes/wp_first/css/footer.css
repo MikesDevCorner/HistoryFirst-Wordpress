@@ -26,13 +26,13 @@
 .footer-menu{
     padding: 0;
 }
-.footer__logo {
-    text-align: right;
-    display: inline-block;
-}
 .footer__logo:not(:last-child) {
-    padding-right: 20px;
+    padding-bottom: calc(15em/16);
 }
 .footer__logo img {
-    height: 60px;
+    width: calc(60em/16);
+    max-width: 100%;
+}
+.align-items-end {
+    align-items: flex-end;
 }

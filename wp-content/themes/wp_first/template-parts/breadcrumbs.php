@@ -9,7 +9,7 @@
 <div class="breadcrumbs bg-brown">
     <div class="container no-container-md">
         <div class="row">
-          <div class="col-md-11 col-9">
+          <div class="col-md-12 col-12">
             <nav class="breadcrumbs-nav">
                 <ol class="list-unstyled">
                   <?php global $post;
@@ -50,11 +50,11 @@
                       $parent = get_category($cat->category_parent);
                       if($parent) {
                         $catLinkParent = get_permalink( get_page_by_path($parent->slug) );
-                        echo $delimiterBefore . '<a href="' . $catLinkParent . '">' . $parent->name . '</a> ';
+                        echo $delimiterBefore . '<a href="' . $catLinkParent . '">' . strip_tags ($parent->name) . '</a> ';
                       }
 
                       $catLink = get_permalink( get_page_by_path(get_category($cat->category_parent)->slug . "/" . $cat->slug) );
-                      echo $delimiterBefore . '<a href="' . $catLink . '">' . $cat->name . '</a> ';
+                      echo $delimiterBefore . '<a href="' . $catLink . '">' . strip_tags ($cat->name) . '</a> ';
                       //echo get_category_parents($cat, TRUE, ' ' . $delimiterAfter . ' ');
                       echo $delimiterBefore . get_the_title() . $after . $delimiterAfter;
                     }
@@ -105,7 +105,7 @@
                 </ol>
             </nav>
           </div>
-          <div class="col-md-1 col-3 speech">
+          <div class="col-md-1 col-3 speech d-none">
               <button class="js-speech-btn">
                   <img src="<?php echo get_template_directory_uri(); ?>/img/play.svg" data-change="<?php echo get_template_directory_uri(); ?>/img/pause.svg" alt="Vorlesen lassen">
               </button>

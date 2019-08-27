@@ -1,7 +1,7 @@
-<header>
+<header <?php if ( is_home() || is_front_page() ) : ?>class="home-header"<?php endif; ?>>
     <div class="container no-container-md">
         <div class="row">
-            <div class="col-10">
+            <div class="<?php if ( is_home() || is_front_page() ) : ?>col-6<?php else: ?>col-10<?php endif; ?>">
                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="logo">
                   <?php if ( is_home() || is_front_page() ) : ?>
                     <?php if(get_field('logo_white', 'options')) : ?><img src="<?php the_field('logo_white', 'options'); ?>" alt="Logo history.first"><?php endif; ?>
@@ -18,19 +18,6 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbar">
-                      <!--<?php $home = get_field("homepage"); ?>
-                      <?php $pid = get_the_ID(); ?>
-                      <ul class="navbar-nav ml-auto">
-                          <li class="nav-item">
-                              <a class="nav-link primary" href="<?php echo esc_url(home_url('/')); ?>" <?php if($pid === $home) : ?>data-scroll-nav="0"<?php endif; ?>>Home</a>
-                          </li>
-
-                        <?php while ( have_rows('menu', $home) ) : the_row(); ?>
-                            <li class="nav-item">
-                                <a class="nav-link <?php if($pid !== $home) : ?>primary<?php endif; ?>" href="<?php echo esc_url(home_url('/')); ?>?sec=<?php echo $col; ?>" <?php if($pid === $home) : ?>data-scroll-nav="<?php echo $col; ?>"<?php endif; ?>><?php the_sub_field('menu-item'); ?></a>
-                            </li>
-                          <?php $col++; endwhile; ?>
-                      </ul> -->
                       <?php
                       if( have_rows('topics', 'options') ):
                         while ( have_rows('topics', 'options') ) : the_row(); ?>
@@ -59,8 +46,18 @@
                           <?php wp_reset_postdata();
                         endwhile; ?>
                       <?php endif; ?>
-                        <ul class="list-unstyled mobile-menu-content" data-post="<?php echo url_to_postid(get_field('upload', 'options')); ?>">
-                            <li class="js-open-mobile-submenu no-sub-items"><a href="<?php the_field('upload', 'options'); ?>"><span class="overlay__first">Datei einreichen</span></a></li>
+                        <?php
+                        $uploadInfoPage = get_field('uploadpage', 'options');
+                        $uploadPage = get_field('uploadpage-upload', 'options');
+                        ?>
+                        <ul class="list-unstyled mobile-menu-content" data-post="<?php echo $uploadPage; ?>">
+                            <li class="js-open-mobile-submenu <?php if($actualID === $uploadInfoPage) : ?>active activeUpload<?php endif; ?>"><a href="<?php echo get_permalink($uploadInfoPage); ?>"><span class="overlay__first"><?php echo get_post($uploadInfoPage)->post_title; ?></span></a>
+                              <?php if($uploadPage) : ?>
+                                  <ul class="list-unstyled mobile-submenu js-mobile-submenu">
+                                      <li class="js-redirect <?php if($actualID === $uploadPage) : ?>active<?php endif; ?>"><a href="<?php echo get_permalink($uploadPage); ?>"><?php echo get_post($uploadPage)->post_title; ?></a></li>
+                                  </ul>
+                              <?php endif; ?>
+                            </li>
                         </ul>
                     </div>
                 </nav>
