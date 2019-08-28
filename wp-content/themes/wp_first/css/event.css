@@ -108,10 +108,10 @@
 
 blockquote {
     position: relative;
-    margin: calc(50em/16) auto;
+    margin: calc(30em/16) auto;
 }
 
-blockquote p {
+blockquote .blockquote__inner {
     position: relative;
     line-height: 1.3;
     margin: 0;
@@ -121,7 +121,7 @@ blockquote p {
     padding: calc(25em/16);
 }
 
-blockquote p:after {
+blockquote .blockquote__inner:after {
     content:"";
     position: absolute;
     border: 2px solid var(--color-primary);
@@ -135,7 +135,7 @@ blockquote p:after {
     z-index: 3;
 }
 
-blockquote p:before {
+blockquote .blockquote__inner:before {
     content:"";
     position: absolute;
     width: calc(80em/16);
