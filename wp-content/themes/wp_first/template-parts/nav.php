@@ -25,6 +25,9 @@
                           setup_postdata( $post ); ?>
                             <ul class="list-unstyled mobile-menu-content" data-post="<?php echo $post->ID; ?>">
                                 <li class="js-open-mobile-submenu <?php if($actualID === $post->ID) : ?>main-item active<?php endif; ?>"><a href="<?php the_permalink(); ?>"><span class="overlay__first"><?php the_title(); ?></span></a>
+                                  <button class="arrow-btn js-arrow-btn" aria-label="Menü öffnen">
+                                    <img src="/wp-content/themes/wp_first/img/arrow.svg" alt="Pfeil" />
+                                  </button>
                                   <?php $args = array(
                                     'post_type'      => 'page',
                                     'posts_per_page' => -1,
@@ -52,7 +55,10 @@
                         ?>
                         <ul class="list-unstyled mobile-menu-content" data-post="<?php echo $uploadPage; ?>">
                             <li class="js-open-mobile-submenu <?php if($actualID === $uploadInfoPage) : ?>active activeUpload<?php endif; ?>"><a href="<?php echo get_permalink($uploadInfoPage); ?>"><span class="overlay__first"><?php echo get_post($uploadInfoPage)->post_title; ?></span></a>
-                              <?php if($uploadPage) : ?>
+                            <button class="arrow-btn js-arrow-btn" aria-label="Menü öffnen">
+                               <img src="/wp-content/themes/wp_first/img/arrow.svg" alt="Pfeil" width="30" height="16"/>
+                            </button>
+                            <?php if($uploadPage) : ?>
                                   <ul class="list-unstyled mobile-submenu js-mobile-submenu">
                                       <li class="js-redirect <?php if($actualID === $uploadPage) : ?>active<?php endif; ?>"><a href="<?php echo get_permalink($uploadPage); ?>"><?php echo get_post($uploadPage)->post_title; ?></a></li>
                                   </ul>

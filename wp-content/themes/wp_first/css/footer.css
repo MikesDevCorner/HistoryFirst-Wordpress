@@ -36,3 +36,13 @@
 .align-items-end {
     align-items: flex-end;
 }
+
+@media screen and (max-width: 35.99rem) {
+    .footer__logo {
+        display: inline-block;
+    }
+    .footer__logo:not(:last-child) {
+        padding-bottom: 0;
+        padding-right: calc(20em/16);
+    }
+}

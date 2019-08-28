@@ -7,7 +7,7 @@ header {
 header.home-header {
     pointer-events: none;
 }
-@media screen and (max-width: 61.99rem) {
+@media screen and (max-width: 63.99rem) {
     header {
         position: relative;
         background: none;

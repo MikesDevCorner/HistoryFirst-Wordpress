@@ -11,12 +11,6 @@
 	    let touchInfo = $(".js-show-touchinfo");
         let padding = 30;
         let middleHeight, restScreen, redRibbon;
-        let isReading = false;
-        let msg = "";
-        let paused = false;
-        let restart = true;
-
-        const colorThief = new ColorThief();
 
         // Polyfill for CSS variables for IE
         cssVars();
@@ -137,6 +131,8 @@
                }
            }
         }); */
+
+        // fix scrolling
         $(".js-menu-item").click(function(e) {
            e.preventDefault();
         });
@@ -166,32 +162,19 @@
         }
 
         // mobile menu
-        /*$(".js-open-mobile-submenu").click(function(e) {
+        $(".js-arrow-btn").click(function() {
             let elem = $(this);
-            if(!$(e.target).closest('.js-mobile-submenu').length) {
-                if(elem.hasClass("open-submenu") || elem.hasClass("no-sub-items")) {
-                    location.href = $(this).find('a:first').attr('href');
-                }
-                e.preventDefault();
+            let parent = elem.parent();
+            if(parent.hasClass("open-submenu")) {
+                parent.removeClass("open-submenu");
+                parent.find(".js-mobile-submenu").removeClass("open").slideUp();
+            } else {
                 $(".open-submenu").removeClass("open-submenu");
                 $(".js-mobile-submenu.open").removeClass("open").slideUp();
-                elem.addClass("open-submenu");
-                elem.parent().find($(".js-mobile-submenu")).addClass("open").slideDown();
+                parent.addClass("open-submenu");
+                parent.find(".js-mobile-submenu").addClass("open").slideDown();
             }
-        });*/
-        
-        $(".js-open-mobile-submenu").on('click', function(e) {
-            let elem = $(this);
-            if(!$(e.target).closest('.js-mobile-submenu').length) {
-                if(elem.hasClass("open-submenu") || elem.hasClass("no-sub-items")) {
-                    location.href = $(this).find('a:first').attr('href');
-                }
-                e.preventDefault();
-                $(".open-submenu").removeClass("open-submenu");
-                $(".js-mobile-submenu.open").removeClass("open").slideUp();
-                elem.toggleClass("open-submenu");
-                elem.parent().find($(".js-mobile-submenu")).addClass("open").slideDown();
-            }
+
         });
 
         // remove visible sidebar menu on desktop

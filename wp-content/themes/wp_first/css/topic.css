@@ -51,7 +51,7 @@
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 1));
 }
 
-@media screen and (max-width: 61.99rem) {
+@media screen and (max-width: 63.99rem) {
     .topic__intro {
         padding: 3rem 0;
     }
@@ -72,7 +72,7 @@
     transition: all 300ms ease;
 }
 
-@media screen and (max-width: 61.99rem) {
+@media screen and (max-width: 63.99rem) {
     .btn {
         padding: calc(15em/16);
     }
