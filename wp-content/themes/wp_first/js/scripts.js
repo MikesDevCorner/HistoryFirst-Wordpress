@@ -10,6 +10,7 @@
 	    let loadScreen = $(".js-home-loading");
 	    let touchInfo = $(".js-show-touchinfo");
         let padding = 30;
+        let showHomeCircleAgain = false;
         let middleHeight, restScreen, redRibbon;
 
         // Polyfill for CSS variables for IE
@@ -17,11 +18,16 @@
 
         let pageTitle = $("title");
         let orgTitle = pageTitle.text();
-        let windowFocus;
+        let windowFocus = true;
 
         $(window).focus(function() {
             windowFocus = true;
             pageTitle.text(orgTitle);
+
+            if(showHomeCircleAgain) {
+                showHomeCircleAgain = false;
+                $(".js-slogan").show().addClass("in").removeClass("out");
+            }
         }).blur(function() {
             windowFocus = false;
             changeTitle();
@@ -122,15 +128,6 @@
             content.removeClass("show");
             elem.removeClass("open");
         });
-
-        // if sidebar menu stays open, close it with click on body
-       /* $("body").on("click touchstart", function(e) {
-           if($(".js-sidebar-menu").hasClass("open")) {
-               if(!$(e.target).hasClass('js-sidebar-menu') && !$(e.target).hasClass('js-menu-item')) {
-                   $(".js-sidebar-menu").removeClass("open");
-               }
-           }
-        }); */
 
         // fix scrolling
         $(".js-menu-item").click(function(e) {
@@ -260,9 +257,14 @@
                         moveRibbon(redRibbon - middleHeight + (padding * 2));
                     }
                     elem.hide().html(text).show().addClass("in").removeClass("out");
-                    setTimeout(function() {
-                        elem.removeClass("in").addClass("out");
-                    }, 4500);
+                    if(windowFocus) {
+                        setTimeout(function () {
+                            elem.removeClass("in").addClass("out");
+                        }, 4500);
+                    } else {
+                        elem.hide().removeClass("in").addClass("out");
+                        showHomeCircleAgain = true;
+                    }
                     if(i < max) {
                         i++;
                     } else {
