@@ -9,8 +9,8 @@
     <div class="container">
       <div class="row">
         <div class="col-md-10 col-xl-9">
-          <h1 class="js-speech-text"><?php the_title(); ?><span class="sr-only" aria-hidden="true">.</span></h1>
-          <div class="js-speech-text">
+          <h1><?php the_title(); ?></h1>
+          <div>
             <?php the_content(); ?>
           </div>
           <?php if(get_field("autor")): ?>
@@ -23,9 +23,7 @@
 
 <section>
   <div class="text-center">
-      <?php if(get_field("parent")) : ?>
-        <?php get_template_part("layout/timeline"); ?>
-      <?php endif; ?>
+    <?php get_template_part("layout/timeline"); ?>
   </div>
 
   <div class="container mb-5">

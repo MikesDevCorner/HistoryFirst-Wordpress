@@ -1,4 +1,4 @@
-<?php /* Template Name: Ereignis */ ?>
+<?php /* Template Name: Epoche */ ?>
 
 <?php get_header(); ?>
 
@@ -10,8 +10,8 @@
       <div class="row">
         <div class="col-md-10 col-xl-9">
           <div class="event__article__date"><?php the_field("date"); ?></div>
-          <h1 class="js-speech-text"><?php the_title(); ?><span class="sr-only" aria-hidden="true">.</span></h1>
-          <div class="js-speech-text">
+          <h1><?php the_title(); ?></h1>
+          <div>
             <?php
             $content = get_the_content();
             $content = apply_filters('the_content', $content);

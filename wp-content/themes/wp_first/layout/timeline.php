@@ -1,5 +1,5 @@
 <div class="frst-container" data-animation-name="slideInUp">
-  <?php $post_object = get_field('parent');
+  <?php global $post; $post_object = $post->ID;
 
   if( $post_object ):
     $args = array(

@@ -8,17 +8,9 @@
 
 add_action('wp_enqueue_scripts', function () {
   // Main Styles
-  wp_enqueue_style('main_css', get_template_directory_uri() . '/style.css', array(), '1.0.0', 'all');
+  wp_enqueue_style('main_css', get_template_directory_uri() . '/css/style.min.css', array(), '1.0.0', 'all');
 
   // Main Scripts
-  //wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/js/libs/bootstrap-4.3.1.min.js', array('jquery'), '1.0.0');
-  //wp_enqueue_script('color-thief', get_template_directory_uri() . '/js/libs/color-thief.js', array('jquery'), '1.0.0');
-  //wp_enqueue_script('css-vars-polyfill', get_template_directory_uri() . '/js/libs/css-var-polyfill.js', array('jquery'), '1.0.0');
-  //wp_enqueue_script('progressbar', get_template_directory_uri() . '/js/libs/progressbar.js', array('jquery'), '1.0.0');
-  //wp_enqueue_script('modernizr', get_template_directory_uri() . '/js/libs/modernizr.js', array('jquery'), '1.0.0', true);
-  //wp_enqueue_script('lightbox', get_template_directory_uri() . '/js/libs/lightbox.min.js', array('jquery'), '1.0.0', true);
-  //wp_enqueue_script('leaflet', get_template_directory_uri() . '/js/libs/leaflet.js', array('jquery'), '1.0.0', true);
-  //wp_enqueue_script('first-timeline', get_template_directory_uri() . '/js/libs/frst-timeline.min.js', array('jquery'), '1.0.0', true);
   wp_enqueue_script('libs', get_template_directory_uri() . '/js/min/libs.min.js', array('jquery'), '1.0.0', true);
   wp_enqueue_script('main_script', get_template_directory_uri() . '/js/min/scripts.min.js', array('jquery'), '1.0.0', true);
 });
@@ -35,8 +27,8 @@ add_action('after_setup_theme', function () {
     'nav_main' => 'Hauptmenu',
     'footer' => 'Footer Navigation',
   ));
-  // $role_object = get_role( 'editor' );
-  // $role_object->add_cap( 'edit_theme_options' );
+  $role_object = get_role( 'editor' );
+  $role_object->add_cap( 'edit_theme_options' );
 });
 
 // remove admin bar
@@ -48,7 +40,6 @@ add_action('show_admin_bar', function () {
 add_action('admin_menu', function () {
   remove_menu_page( 'index.php' );                  //Dashboard
   remove_menu_page( 'edit-comments.php' );          //Comments
-  //remove_menu_page( 'edit.php' );          	        //Posts
 });
 
 // backend logo
@@ -211,3 +202,32 @@ add_action('acf/input/admin_head', 'acf_admin_head');
 // REMOVE WP EMOJI
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
+
+// rename posts
+function change_post_label() {
+  global $menu;
+  global $submenu;
+  $menu[5][0] = 'Objekte';
+  $submenu['edit.php'][5][0] = 'Objekte';
+  $submenu['edit.php'][10][0] = 'Objekt hinzufügen';
+}
+function change_post_object() {
+  global $wp_post_types;
+  $labels = &$wp_post_types['post']->labels;
+  $labels->name = 'Objekte';
+  $labels->singular_name = 'Objekt';
+  $labels->add_new = 'Objekt hinzufügen';
+  $labels->add_new_item = 'Objekt hinzufügen';
+  $labels->edit_item = 'Objekt bearbeiten';
+  $labels->new_item = 'Objekt';
+  $labels->view_item = 'Zeige Objekte';
+  $labels->search_items = 'Suche Objekte';
+  $labels->not_found = 'Keine Objekte gefunden';
+  $labels->not_found_in_trash = 'Keine Objekte im Papierkorb gefunden';
+  $labels->all_items = 'Alle Objekte';
+  $labels->menu_name = 'Objekte';
+  $labels->name_admin_bar = 'Objekte';
+}
+
+add_action( 'admin_menu', 'change_post_label' );
+add_action( 'init', 'change_post_object' );
